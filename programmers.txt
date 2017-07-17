@@ -1,0 +1,6 @@
+jlink.name=J-Link
+jlink.communication=USB
+jlink.protocol=jlink
+jlink.program.protocol=jlink
+jlink.program.tool=openocd
+jlink.program.setup_command=transport select swd; set WORKAREASIZE 0;

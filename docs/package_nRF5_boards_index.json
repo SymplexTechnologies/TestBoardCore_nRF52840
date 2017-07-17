@@ -1,0 +1,53 @@
+{
+  "packages": [
+    {
+      "name": "SymplexTechnologies",
+      "maintainer": "SymplexTech",
+      "websiteURL": "https://github.com/sandeepmistry/arduino-nRF5",
+      "email": "sandeep.mistry@gmail.com",
+      "help": {
+        "online": "https://github.com/sandeepmistry/arduino-nRF5/issues"
+      },
+      "platforms": [
+        {
+          "name": "Nordic Semiconductor nRF52840 Test",
+          "architecture": "nRF5",
+          "version": "0.1.0",
+          "category": "Contributed",
+          "help": {
+            "online": "https://github.com/sandeepmistry/arduino-nRF5/issues"
+          },
+          "url": "https://github.com/sandeepmistry/arduino-nRF5/archive/0.1.0.tar.gz",
+          "archiveFileName": "arduino-nRF52-0.1.0.tar.gz",
+          "checksum": "MD5:1825f6420104225f5fee11b467923b7d",
+          "size": "591297",
+          "boards": [
+            {"name": "nRF52840 DK"}
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "sandeepmistry",
+              "name": "gcc-arm-none-eabi",
+              "version": "5_2-2015q4"
+            }
+          ]
+        }
+      ],
+      "tools":[
+        {
+          "name": "gcc-arm-none-eabi",
+          "version": "5_2-2015q4",
+          "systems": [
+            {
+              "host": "i686-mingw32",
+              "url": "https://github.com/sandeepmistry/arduino-nRF5/releases/download/tools/gcc-arm-none-eabi-5_2-2015q4-20151219-win32.tar.bz2",
+              "archiveFileName": "gcc-arm-none-eabi-5_2-2015q4-20151219-win32.tar.bz2",
+              "size": "102981732",
+              "checksum": "MD5:32d950225b6c7c886f6225c1fc578934"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

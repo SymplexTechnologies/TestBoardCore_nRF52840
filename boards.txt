@@ -1,0 +1,99 @@
+# Copyright (c) 2014-2015 Arduino LLC.  All right reserved.
+# Copyright (c) 2016 Sandeep Mistry All right reserved.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+menu.chip=Chip
+menu.softdevice=Softdevice
+menu.version=Version
+menu.lfclk=Low Frequency Clock
+menu.board_variant=Board Variant
+
+# nRF52832 variants
+###################
+
+Generic_nRF52832.name=Generic nRF52
+
+Generic_nRF52832.upload.tool=sandeepmistry:openocd
+Generic_nRF52832.upload.target=nrf52
+Generic_nRF52832.upload.maximum_size=524288
+
+Generic_nRF52832.bootloader.tool=sandeepmistry:openocd
+
+Generic_nRF52832.build.mcu=cortex-m4
+Generic_nRF52832.build.f_cpu=16000000
+Generic_nRF52832.build.board=GENERIC
+Generic_nRF52832.build.core=nRF5
+Generic_nRF52832.build.variant=Generic
+Generic_nRF52832.build.variant_system_lib=
+Generic_nRF52832.build.extra_flags=-DNRF52
+Generic_nRF52832.build.float_flags=-mfloat-abi=hard -mfpu=fpv4-sp-d16
+Generic_nRF52832.build.ldscript=nrf52_xxaa.ld
+
+Generic_nRF52832.menu.softdevice.none=None
+Generic_nRF52832.menu.softdevice.none.softdevice=none
+
+Generic_nRF52832.menu.softdevice.s132=S132
+Generic_nRF52832.menu.softdevice.s132.softdevice=s132
+Generic_nRF52832.menu.softdevice.s132.softdeviceversion=2.0.1
+Generic_nRF52832.menu.softdevice.s132.upload.maximum_size=409600
+Generic_nRF52832.menu.softdevice.s132.build.extra_flags=-DNRF52 -DS132 -DNRF51_S132
+Generic_nRF52832.menu.softdevice.s132.build.ldscript=armgcc_s132_nrf52832_xxaa.ld
+
+Generic_nRF52832.menu.lfclk.lfxo=Crystal Oscillator
+Generic_nRF52832.menu.lfclk.lfxo.build.lfclk_flags=-DUSE_LFXO
+Generic_nRF52832.menu.lfclk.lfrc=RC Oscillator
+Generic_nRF52832.menu.lfclk.lfrc.build.lfclk_flags=-DUSE_LFRC
+Generic_nRF52832.menu.lfclk.lfsynt=Synthesized
+Generic_nRF52832.menu.lfclk.lfsynt.build.lfclk_flags=-DUSE_LFSYNT
+
+
+nRF52DK.name=Nordic Semiconductor nRF52 DK
+
+nRF52DK.vid.0=0x1366
+nRF52DK.pid.0=0x1015
+
+nRF52DK.upload.tool=sandeepmistry:openocd
+nRF52DK.upload.protocol=jlink
+nRF52DK.upload.target=nrf52
+nRF52DK.upload.maximum_size=524288
+nRF52DK.upload.setup_command=transport select swd;
+nRF52DK.upload.use_1200bps_touch=false
+nRF52DK.upload.wait_for_upload_port=false
+nRF52DK.upload.native_usb=false
+
+nRF52DK.bootloader.tool=sandeepmistry:openocd
+
+nRF52DK.build.mcu=cortex-m4
+nRF52DK.build.f_cpu=16000000
+nRF52DK.build.board=NRF52_DK
+nRF52DK.build.core=nRF5
+nRF52DK.build.variant=nRF52DK
+nRF52DK.build.variant_system_lib=
+nRF52DK.build.extra_flags=-DNRF52
+nRF52DK.build.float_flags=-mfloat-abi=hard -mfpu=fpv4-sp-d16
+nRF52DK.build.ldscript=nrf52_xxaa.ld
+
+nRF52DK.build.lfclk_flags=-DUSE_LFXO
+
+nRF52DK.menu.softdevice.none=None
+nRF52DK.menu.softdevice.none.softdevice=none
+
+nRF52DK.menu.softdevice.s132=S132
+nRF52DK.menu.softdevice.s132.softdevice=s132
+nRF52DK.menu.softdevice.s132.softdeviceversion=2.0.1
+nRF52DK.menu.softdevice.s132.upload.maximum_size=409600
+nRF52DK.menu.softdevice.s132.build.extra_flags=-DNRF52 -DS132 -DNRF51_S132
+nRF52DK.menu.softdevice.s132.build.ldscript=armgcc_s132_nrf52832_xxaa.ld
