@@ -25,20 +25,13 @@ Uart::Uart(NRF_UART_Type *_nrfUart, IRQn_Type _IRQn, uint8_t _pinRX, uint8_t _pi
 {
   nrfUart = _nrfUart;
   IRQn = _IRQn;
-  uc_pinRX = g_ADigitalPinMap[_pinRX];
-  uc_pinTX = g_ADigitalPinMap[_pinTX];
-  uc_hwFlow = 0;
-}
-
-Uart::Uart(NRF_UART_Type *_nrfUart, IRQn_Type _IRQn, uint8_t _pinRX, uint8_t _pinTX, uint8_t _pinCTS, uint8_t _pinRTS)
-{
-  nrfUart = _nrfUart;
-  IRQn = _IRQn;
-  uc_pinRX = g_ADigitalPinMap[_pinRX];
-  uc_pinTX = g_ADigitalPinMap[_pinTX];
-  uc_pinCTS = g_ADigitalPinMap[_pinCTS];
-  uc_pinRTS = g_ADigitalPinMap[_pinRTS];
-  uc_hwFlow = 1;
+  #ifdef NRF52840
+    uc_pinRX = g_ADigitalPinMap[_pinRX].ulPin;
+    uc_pinTX = g_ADigitalPinMap[_pinTX].ulPin;
+  #else
+    uc_pinRX = g_ADigitalPinMap[_pinRX];
+    uc_pinTX = g_ADigitalPinMap[_pinTX];
+  #endif
 }
 
 void Uart::begin(unsigned long baudrate)
@@ -51,14 +44,7 @@ void Uart::begin(unsigned long baudrate, uint16_t /*config*/)
   nrfUart->PSELTXD = uc_pinTX;
   nrfUart->PSELRXD = uc_pinRX;
 
-  if (uc_hwFlow == 1) {
-    nrfUart->PSELCTS = uc_pinCTS;
-    nrfUart->PSELRTS = uc_pinRTS;
-    nrfUart->CONFIG = (UART_CONFIG_PARITY_Excluded << UART_CONFIG_PARITY_Pos) | UART_CONFIG_HWFC_Enabled;
-  } else {
-    nrfUart->CONFIG = (UART_CONFIG_PARITY_Excluded << UART_CONFIG_PARITY_Pos) | UART_CONFIG_HWFC_Disabled;
-  }
-
+  nrfUart->CONFIG = (UART_CONFIG_PARITY_Excluded << UART_CONFIG_PARITY_Pos) | UART_CONFIG_HWFC_Disabled;
 
   uint32_t nrfBaudRate;
 
@@ -163,9 +149,6 @@ void Uart::end()
   nrfUart->PSELTXD = 0xFFFFFFFF;
   nrfUart->PSELRXD = 0xFFFFFFFF;
 
-  nrfUart->PSELRTS = 0xFFFFFFFF;
-  nrfUart->PSELCTS = 0xFFFFFFFF;
-
   rxBuffer.clear();
 }
 
@@ -210,18 +193,8 @@ size_t Uart::write(const uint8_t data)
 }
 
 #if defined(NRF52)
-  #define NRF_UART0_IRQn UARTE0_UART0_IRQn
-#elif defined(NRF51)
-  #define NRF_UART0_IRQn UART0_IRQn
-#endif
+Uart Serial( NRF_UART0, UARTE0_UART0_IRQn, PIN_SERIAL_RX, PIN_SERIAL_TX );
 
-#if defined(PIN_SERIAL_CTS) && defined(PIN_SERIAL_RTS)
-  Uart Serial( NRF_UART0, NRF_UART0_IRQn, PIN_SERIAL_RX, PIN_SERIAL_TX, PIN_SERIAL_CTS, PIN_SERIAL_RTS );
-#else
-  Uart Serial( NRF_UART0, NRF_UART0_IRQn, PIN_SERIAL_RX, PIN_SERIAL_TX );
-#endif
-
-#if defined(NRF52)
 extern "C"
 {
   void UARTE0_UART0_IRQHandler()
@@ -230,6 +203,8 @@ extern "C"
   }
 }
 #elif defined(NRF51)
+Uart Serial( NRF_UART0, UART0_IRQn, PIN_SERIAL_RX, PIN_SERIAL_TX );
+
 extern "C"
 {
   void UART0_IRQHandler()

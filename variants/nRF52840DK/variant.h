@@ -14,8 +14,8 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef _VARIANT_NRF52_DK_
-#define _VARIANT_NRF52_DK_
+#ifndef _VARIANT_NRF52840_DK_
+#define _VARIANT_NRF52840_DK_
 
 /** Master clock frequency */
 #define VARIANT_MCK       (64000000ul)
@@ -31,24 +31,35 @@ extern "C"
 {
 #endif // __cplusplus
 
+#define NRF_GPIO_PIN_MAP(port, pin)   ((port << 5) | (pin & 0x1F))
+
+
+/* GPIO */
+#define GPIO_PRESENT
+#define GPIO_COUNT 2
+
+#define P0_PIN_NUM 32
+#define P1_PIN_NUM 16
+
+
 // Number of pins defined in PinDescription array
-#define PINS_COUNT           (26u)
+#define PINS_COUNT           (32u)
 #define NUM_DIGITAL_PINS     (20u)
-#define NUM_ANALOG_INPUTS    (8u)
+#define NUM_ANALOG_INPUTS    (6u)
 #define NUM_ANALOG_OUTPUTS   (0u)
 
 // LEDs
-#define PIN_LED1                (6)
-#define PIN_LED2                (7)
-#define PIN_LED3                (8)
-#define PIN_LED4                (9)
+#define PIN_LED1                (25)
+#define PIN_LED2                (26)
+#define PIN_LED3                (27)
+#define PIN_LED4                (28)
 #define LED_BUILTIN             PIN_LED1
 
 // Buttons
-#define PIN_BUTTON1             (2)
-#define PIN_BUTTON2             (3)
-#define PIN_BUTTON3             (4)
-#define PIN_BUTTON4             (5)
+#define PIN_BUTTON1             (29)
+#define PIN_BUTTON2             (30)
+#define PIN_BUTTON3             (31)
+#define PIN_BUTTON4             (32)
 
 /*
  * Analog pins
@@ -59,29 +70,25 @@ extern "C"
 #define PIN_A3               (17)
 #define PIN_A4               (18)
 #define PIN_A5               (19)
-#define PIN_A6               (20) /* AIN3 (P0.05)        */
-#define PIN_A7               (21) /* AIN0 (P0.02) / AREF */
 
-static const uint8_t A0  = PIN_A0 ; // AIN1
-static const uint8_t A1  = PIN_A1 ; // AIN2
-static const uint8_t A2  = PIN_A2 ; // AIN4
-static const uint8_t A3  = PIN_A3 ; // AIN5
-static const uint8_t A4  = PIN_A4 ; // AIN6
-static const uint8_t A5  = PIN_A5 ; // AIN7
-static const uint8_t A6  = PIN_A6 ; // AIN3 (P0.05)
-static const uint8_t A7  = PIN_A7 ; // AIN0 (P0.02) / AREF
+static const uint8_t A0  = PIN_A0 ;
+static const uint8_t A1  = PIN_A1 ;
+static const uint8_t A2  = PIN_A2 ;
+static const uint8_t A3  = PIN_A3 ;
+static const uint8_t A4  = PIN_A4 ;
+static const uint8_t A5  = PIN_A5 ;
 #define ADC_RESOLUTION    14
 
 // Other pins
-#define PIN_AREF           (21)
+#define PIN_AREF           (24)
 static const uint8_t AREF = PIN_AREF;
 
 /*
  * Serial interfaces
  */
 // Serial
-#define PIN_SERIAL_RX       (24)
-#define PIN_SERIAL_TX       (25)
+#define PIN_SERIAL_RX       (22)
+#define PIN_SERIAL_TX       (23)
 
 /*
  * SPI Interfaces
@@ -102,11 +109,8 @@ static const uint8_t SCK  = PIN_SPI_SCK ;
  */
 #define WIRE_INTERFACES_COUNT 1
 
-#define PIN_WIRE_SDA         (22u)
-#define PIN_WIRE_SCL         (23u)
-
-static const uint8_t SDA = PIN_WIRE_SDA;
-static const uint8_t SCL = PIN_WIRE_SCL;
+#define PIN_WIRE_SDA         (20u)
+#define PIN_WIRE_SCL         (21u)
 
 #ifdef __cplusplus
 }

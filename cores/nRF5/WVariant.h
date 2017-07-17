@@ -24,7 +24,25 @@
 extern "C" {
 #endif
 
+
+
+#ifdef NRF52840
+/* Types used for the table below */
+typedef struct _PinDescription
+{
+  uint8_t       ulPort ;
+  uint32_t        ulPin ;
+} PinDescription ;
+
+/* Pins table to be instantiated into variant.cpp */
+extern const PinDescription g_ADigitalPinMap[] ;
+
+#else
+
 extern const uint32_t g_ADigitalPinMap[] ;
+
+#endif
+
 
 #ifdef __cplusplus
 } // extern "C"

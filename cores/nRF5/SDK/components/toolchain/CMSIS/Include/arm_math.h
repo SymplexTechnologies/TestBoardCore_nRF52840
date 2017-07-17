@@ -39,6 +39,130 @@
  * -------------------------------------------------------------------- */
 
 /**
+   \mainpage CMSIS DSP Software Library
+   *
+   * Introduction
+   * ------------
+   *
+   * This user manual describes the CMSIS DSP software library,
+   * a suite of common signal processing functions for use on Cortex-M processor based devices.
+   *
+   * The library is divided into a number of functions each covering a specific category:
+   * - Basic math functions
+   * - Fast math functions
+   * - Complex math functions
+   * - Filters
+   * - Matrix functions
+   * - Transforms
+   * - Motor control functions
+   * - Statistical functions
+   * - Support functions
+   * - Interpolation functions
+   *
+   * The library has separate functions for operating on 8-bit integers, 16-bit integers,
+   * 32-bit integer and 32-bit floating-point values.
+   *
+   * Using the Library
+   * ------------
+   *
+   * The library installer contains prebuilt versions of the libraries in the <code>Lib</code> folder.
+   * - arm_cortexM7lfdp_math.lib (Little endian and Double Precision Floating Point Unit on Cortex-M7)
+   * - arm_cortexM7bfdp_math.lib (Big endian and Double Precision Floating Point Unit on Cortex-M7)
+   * - arm_cortexM7lfsp_math.lib (Little endian and Single Precision Floating Point Unit on Cortex-M7)
+   * - arm_cortexM7bfsp_math.lib (Big endian and Single Precision Floating Point Unit on Cortex-M7)
+   * - arm_cortexM7l_math.lib (Little endian on Cortex-M7)
+   * - arm_cortexM7b_math.lib (Big endian on Cortex-M7)
+   * - arm_cortexM4lf_math.lib (Little endian and Floating Point Unit on Cortex-M4)
+   * - arm_cortexM4bf_math.lib (Big endian and Floating Point Unit on Cortex-M4)
+   * - arm_cortexM4l_math.lib (Little endian on Cortex-M4)
+   * - arm_cortexM4b_math.lib (Big endian on Cortex-M4)
+   * - arm_cortexM3l_math.lib (Little endian on Cortex-M3)
+   * - arm_cortexM3b_math.lib (Big endian on Cortex-M3)
+   * - arm_cortexM0l_math.lib (Little endian on Cortex-M0 / CortexM0+)
+   * - arm_cortexM0b_math.lib (Big endian on Cortex-M0 / CortexM0+)
+   *
+   * The library functions are declared in the public file <code>arm_math.h</code> which is placed in the <code>Include</code> folder.
+   * Simply include this file and link the appropriate library in the application and begin calling the library functions. The Library supports single
+   * public header file <code> arm_math.h</code> for Cortex-M7/M4/M3/M0/M0+ with little endian and big endian. Same header file will be used for floating point unit(FPU) variants.
+   * Define the appropriate pre processor MACRO ARM_MATH_CM7 or ARM_MATH_CM4 or  ARM_MATH_CM3 or
+   * ARM_MATH_CM0 or ARM_MATH_CM0PLUS depending on the target processor in the application.
+   *
+   * Examples
+   * --------
+   *
+   * The library ships with a number of examples which demonstrate how to use the library functions.
+   *
+   * Toolchain Support
+   * ------------
+   *
+   * The library has been developed and tested with MDK-ARM version 5.14.0.0
+   * The library is being tested in GCC and IAR toolchains and updates on this activity will be made available shortly.
+   *
+   * Building the Library
+   * ------------
+   *
+   * The library installer contains a project file to re build libraries on MDK-ARM Tool chain in the <code>CMSIS\\DSP_Lib\\Source\\ARM</code> folder.
+   * - arm_cortexM_math.uvprojx
+   *
+   *
+   * The libraries can be built by opening the arm_cortexM_math.uvprojx project in MDK-ARM, selecting a specific target, and defining the optional pre processor MACROs detailed above.
+   *
+   * Pre-processor Macros
+   * ------------
+   *
+   * Each library project have differant pre-processor macros.
+   *
+   * - UNALIGNED_SUPPORT_DISABLE:
+   *
+   * Define macro UNALIGNED_SUPPORT_DISABLE, If the silicon does not support unaligned memory access
+   *
+   * - ARM_MATH_BIG_ENDIAN:
+   *
+   * Define macro ARM_MATH_BIG_ENDIAN to build the library for big endian targets. By default library builds for little endian targets.
+   *
+   * - ARM_MATH_MATRIX_CHECK:
+   *
+   * Define macro ARM_MATH_MATRIX_CHECK for checking on the input and output sizes of matrices
+   *
+   * - ARM_MATH_ROUNDING:
+   *
+   * Define macro ARM_MATH_ROUNDING for rounding on support functions
+   *
+   * - ARM_MATH_CMx:
+   *
+   * Define macro ARM_MATH_CM4 for building the library on Cortex-M4 target, ARM_MATH_CM3 for building library on Cortex-M3 target
+   * and ARM_MATH_CM0 for building library on Cortex-M0 target, ARM_MATH_CM0PLUS for building library on Cortex-M0+ target, and
+   * ARM_MATH_CM7 for building the library on cortex-M7.
+   *
+   * - __FPU_PRESENT:
+   *
+   * Initialize macro __FPU_PRESENT = 1 when building on FPU supported Targets. Enable this macro for M4bf and M4lf libraries
+   *
+   * <hr>
+   * CMSIS-DSP in ARM::CMSIS Pack
+   * -----------------------------
+   *
+   * The following files relevant to CMSIS-DSP are present in the <b>ARM::CMSIS</b> Pack directories:
+   * |File/Folder                   |Content                                                                 |
+   * |------------------------------|------------------------------------------------------------------------|
+   * |\b CMSIS\\Documentation\\DSP  | This documentation                                                     |
+   * |\b CMSIS\\DSP_Lib             | Software license agreement (license.txt)                               |
+   * |\b CMSIS\\DSP_Lib\\Examples   | Example projects demonstrating the usage of the library functions      |
+   * |\b CMSIS\\DSP_Lib\\Source     | Source files for rebuilding the library                                |
+   *
+   * <hr>
+   * Revision History of CMSIS-DSP
+   * ------------
+   * Please refer to \ref ChangeLog_pg.
+   *
+   * Copyright Notice
+   * ------------
+   *
+   * Copyright (C) 2010-2015 ARM Limited. All rights reserved.
+   */
+
+
+/**
  * @defgroup groupMath Basic Math Functions
  */
 
@@ -422,7 +546,7 @@ extern "C"
     uint32_t count = 0;
     uint32_t mask = 0x80000000;
 
-    while ((data & mask) == 0)
+    while((data & mask) == 0)
     {
       count += 1u;
       mask = mask >> 1u;
@@ -446,7 +570,7 @@ extern "C"
     uint32_t index, i;
     uint32_t signBits;
 
-    if (in > 0)
+    if(in > 0)
     {
       signBits = ((uint32_t) (__CLZ( in) - 1));
     }
@@ -497,7 +621,7 @@ extern "C"
     uint32_t index = 0, i = 0;
     uint32_t signBits = 0;
 
-    if (in > 0)
+    if(in > 0)
     {
       signBits = ((uint32_t)(__CLZ( in) - 17));
     }
@@ -552,11 +676,11 @@ extern "C"
       posMax = posMax * 2;
     }
 
-    if (x > 0)
+    if(x > 0)
     {
       posMax = (posMax - 1);
 
-      if (x > posMax)
+      if(x > posMax)
       {
         x = posMax;
       }
@@ -565,7 +689,7 @@ extern "C"
     {
       negMin = -posMax;
 
-      if (x < negMin)
+      if(x < negMin)
       {
         x = negMin;
       }
@@ -905,7 +1029,7 @@ extern "C"
   typedef struct
   {
     uint16_t numTaps;        /**< number of filter coefficients in the filter. */
-    q7_t *pState;            /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    q7_t *pState;            /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
     q7_t *pCoeffs;           /**< points to the coefficient array. The array is of length numTaps.*/
   } arm_fir_instance_q7;
 
@@ -915,7 +1039,7 @@ extern "C"
   typedef struct
   {
     uint16_t numTaps;         /**< number of filter coefficients in the filter. */
-    q15_t *pState;            /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    q15_t *pState;            /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
     q15_t *pCoeffs;           /**< points to the coefficient array. The array is of length numTaps.*/
   } arm_fir_instance_q15;
 
@@ -925,7 +1049,7 @@ extern "C"
   typedef struct
   {
     uint16_t numTaps;         /**< number of filter coefficients in the filter. */
-    q31_t *pState;            /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    q31_t *pState;            /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
     q31_t *pCoeffs;           /**< points to the coefficient array. The array is of length numTaps. */
   } arm_fir_instance_q31;
 
@@ -935,7 +1059,7 @@ extern "C"
   typedef struct
   {
     uint16_t numTaps;     /**< number of filter coefficients in the filter. */
-    float32_t *pState;    /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    float32_t *pState;    /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
     float32_t *pCoeffs;   /**< points to the coefficient array. The array is of length numTaps. */
   } arm_fir_instance_f32;
 
@@ -2788,7 +2912,7 @@ void arm_rfft_fast_f32(
  * @param[in]  srcALen  length of the first input sequence.
  * @param[in]  pSrcB    points to the second input sequence.
  * @param[in]  srcBLen  length of the second input sequence.
- * @param[out] pDst     points to the location where the output result is written.  Length srcALen + srcBLen-1.
+ * @param[out] pDst     points to the location where the output result is written.  Length srcALen+srcBLen-1.
  */
   void arm_conv_f32(
   float32_t * pSrcA,
@@ -2804,7 +2928,7 @@ void arm_rfft_fast_f32(
    * @param[in]  srcALen    length of the first input sequence.
    * @param[in]  pSrcB      points to the second input sequence.
    * @param[in]  srcBLen    length of the second input sequence.
-   * @param[out] pDst       points to the block of output data  Length srcALen + srcBLen-1.
+   * @param[out] pDst       points to the block of output data  Length srcALen+srcBLen-1.
    * @param[in]  pScratch1  points to scratch buffer of size max(srcALen, srcBLen) + 2*min(srcALen, srcBLen) - 2.
    * @param[in]  pScratch2  points to scratch buffer of size min(srcALen, srcBLen).
    */
@@ -2824,7 +2948,7 @@ void arm_rfft_fast_f32(
  * @param[in]  srcALen  length of the first input sequence.
  * @param[in]  pSrcB    points to the second input sequence.
  * @param[in]  srcBLen  length of the second input sequence.
- * @param[out] pDst     points to the location where the output result is written.  Length srcALen + srcBLen-1.
+ * @param[out] pDst     points to the location where the output result is written.  Length srcALen+srcBLen-1.
  */
   void arm_conv_q15(
   q15_t * pSrcA,
@@ -2840,7 +2964,7 @@ void arm_rfft_fast_f32(
    * @param[in]  srcALen  length of the first input sequence.
    * @param[in]  pSrcB    points to the second input sequence.
    * @param[in]  srcBLen  length of the second input sequence.
-   * @param[out] pDst     points to the block of output data  Length srcALen + srcBLen-1.
+   * @param[out] pDst     points to the block of output data  Length srcALen+srcBLen-1.
    */
   void arm_conv_fast_q15(
           q15_t * pSrcA,
@@ -2856,7 +2980,7 @@ void arm_rfft_fast_f32(
    * @param[in]  srcALen    length of the first input sequence.
    * @param[in]  pSrcB      points to the second input sequence.
    * @param[in]  srcBLen    length of the second input sequence.
-   * @param[out] pDst       points to the block of output data  Length srcALen + srcBLen-1.
+   * @param[out] pDst       points to the block of output data  Length srcALen+srcBLen-1.
    * @param[in]  pScratch1  points to scratch buffer of size max(srcALen, srcBLen) + 2*min(srcALen, srcBLen) - 2.
    * @param[in]  pScratch2  points to scratch buffer of size min(srcALen, srcBLen).
    */
@@ -2876,7 +3000,7 @@ void arm_rfft_fast_f32(
    * @param[in]  srcALen  length of the first input sequence.
    * @param[in]  pSrcB    points to the second input sequence.
    * @param[in]  srcBLen  length of the second input sequence.
-   * @param[out] pDst     points to the block of output data  Length srcALen + srcBLen-1.
+   * @param[out] pDst     points to the block of output data  Length srcALen+srcBLen-1.
    */
   void arm_conv_q31(
   q31_t * pSrcA,
@@ -2892,7 +3016,7 @@ void arm_rfft_fast_f32(
    * @param[in]  srcALen  length of the first input sequence.
    * @param[in]  pSrcB    points to the second input sequence.
    * @param[in]  srcBLen  length of the second input sequence.
-   * @param[out] pDst     points to the block of output data  Length srcALen + srcBLen-1.
+   * @param[out] pDst     points to the block of output data  Length srcALen+srcBLen-1.
    */
   void arm_conv_fast_q31(
   q31_t * pSrcA,
@@ -2908,7 +3032,7 @@ void arm_rfft_fast_f32(
    * @param[in]  srcALen    length of the first input sequence.
    * @param[in]  pSrcB      points to the second input sequence.
    * @param[in]  srcBLen    length of the second input sequence.
-   * @param[out] pDst       points to the block of output data  Length srcALen + srcBLen-1.
+   * @param[out] pDst       points to the block of output data  Length srcALen+srcBLen-1.
    * @param[in]  pScratch1  points to scratch buffer(of type q15_t) of size max(srcALen, srcBLen) + 2*min(srcALen, srcBLen) - 2.
    * @param[in]  pScratch2  points to scratch buffer (of type q15_t) of size min(srcALen, srcBLen).
    */
@@ -2928,7 +3052,7 @@ void arm_rfft_fast_f32(
    * @param[in]  srcALen  length of the first input sequence.
    * @param[in]  pSrcB    points to the second input sequence.
    * @param[in]  srcBLen  length of the second input sequence.
-   * @param[out] pDst     points to the block of output data  Length srcALen + srcBLen-1.
+   * @param[out] pDst     points to the block of output data  Length srcALen+srcBLen-1.
    */
   void arm_conv_q7(
   q7_t * pSrcA,
@@ -2947,7 +3071,7 @@ void arm_rfft_fast_f32(
    * @param[out] pDst        points to the block of output data
    * @param[in]  firstIndex  is the first output sample to start with.
    * @param[in]  numPoints   is the number of output points to be computed.
-   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen + srcBLen-2].
+   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
    */
   arm_status arm_conv_partial_f32(
   float32_t * pSrcA,
@@ -2970,7 +3094,7 @@ void arm_rfft_fast_f32(
    * @param[in]  numPoints   is the number of output points to be computed.
    * @param[in]  pScratch1   points to scratch buffer of size max(srcALen, srcBLen) + 2*min(srcALen, srcBLen) - 2.
    * @param[in]  pScratch2   points to scratch buffer of size min(srcALen, srcBLen).
-   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen + srcBLen-2].
+   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
    */
   arm_status arm_conv_partial_opt_q15(
   q15_t * pSrcA,
@@ -2993,7 +3117,7 @@ void arm_rfft_fast_f32(
    * @param[out] pDst        points to the block of output data
    * @param[in]  firstIndex  is the first output sample to start with.
    * @param[in]  numPoints   is the number of output points to be computed.
-   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen + srcBLen-2].
+   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
    */
   arm_status arm_conv_partial_q15(
   q15_t * pSrcA,
@@ -3014,7 +3138,7 @@ void arm_rfft_fast_f32(
    * @param[out] pDst        points to the block of output data
    * @param[in]  firstIndex  is the first output sample to start with.
    * @param[in]  numPoints   is the number of output points to be computed.
-   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen + srcBLen-2].
+   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
    */
   arm_status arm_conv_partial_fast_q15(
   q15_t * pSrcA,
@@ -3037,7 +3161,7 @@ void arm_rfft_fast_f32(
    * @param[in]  numPoints   is the number of output points to be computed.
    * @param[in]  pScratch1   points to scratch buffer of size max(srcALen, srcBLen) + 2*min(srcALen, srcBLen) - 2.
    * @param[in]  pScratch2   points to scratch buffer of size min(srcALen, srcBLen).
-   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen + srcBLen-2].
+   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
    */
   arm_status arm_conv_partial_fast_opt_q15(
   q15_t * pSrcA,
@@ -3060,7 +3184,7 @@ void arm_rfft_fast_f32(
    * @param[out] pDst        points to the block of output data
    * @param[in]  firstIndex  is the first output sample to start with.
    * @param[in]  numPoints   is the number of output points to be computed.
-   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen + srcBLen-2].
+   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
    */
   arm_status arm_conv_partial_q31(
   q31_t * pSrcA,
@@ -3081,7 +3205,7 @@ void arm_rfft_fast_f32(
    * @param[out] pDst        points to the block of output data
    * @param[in]  firstIndex  is the first output sample to start with.
    * @param[in]  numPoints   is the number of output points to be computed.
-   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen + srcBLen-2].
+   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
    */
   arm_status arm_conv_partial_fast_q31(
   q31_t * pSrcA,
@@ -3104,7 +3228,7 @@ void arm_rfft_fast_f32(
    * @param[in]  numPoints   is the number of output points to be computed.
    * @param[in]  pScratch1   points to scratch buffer(of type q15_t) of size max(srcALen, srcBLen) + 2*min(srcALen, srcBLen) - 2.
    * @param[in]  pScratch2   points to scratch buffer (of type q15_t) of size min(srcALen, srcBLen).
-   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen + srcBLen-2].
+   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
    */
   arm_status arm_conv_partial_opt_q7(
   q7_t * pSrcA,
@@ -3127,7 +3251,7 @@ void arm_rfft_fast_f32(
    * @param[out] pDst        points to the block of output data
    * @param[in]  firstIndex  is the first output sample to start with.
    * @param[in]  numPoints   is the number of output points to be computed.
-   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen + srcBLen-2].
+   * @return  Returns either ARM_MATH_SUCCESS if the function completed correctly or ARM_MATH_ARGUMENT_ERROR if the requested subset is not in the range [0 srcALen+srcBLen-2].
    */
   arm_status arm_conv_partial_q7(
   q7_t * pSrcA,
@@ -3147,7 +3271,7 @@ void arm_rfft_fast_f32(
     uint8_t M;                  /**< decimation factor. */
     uint16_t numTaps;           /**< number of coefficients in the filter. */
     q15_t *pCoeffs;             /**< points to the coefficient array. The array is of length numTaps.*/
-    q15_t *pState;              /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    q15_t *pState;              /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
   } arm_fir_decimate_instance_q15;
 
   /**
@@ -3158,7 +3282,7 @@ void arm_rfft_fast_f32(
     uint8_t M;                  /**< decimation factor. */
     uint16_t numTaps;           /**< number of coefficients in the filter. */
     q31_t *pCoeffs;             /**< points to the coefficient array. The array is of length numTaps.*/
-    q31_t *pState;              /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    q31_t *pState;              /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
   } arm_fir_decimate_instance_q31;
 
   /**
@@ -3169,7 +3293,7 @@ void arm_rfft_fast_f32(
     uint8_t M;                  /**< decimation factor. */
     uint16_t numTaps;           /**< number of coefficients in the filter. */
     float32_t *pCoeffs;         /**< points to the coefficient array. The array is of length numTaps.*/
-    float32_t *pState;          /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    float32_t *pState;          /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
   } arm_fir_decimate_instance_f32;
 
 
@@ -3310,7 +3434,7 @@ void arm_rfft_fast_f32(
     uint8_t L;                      /**< upsample factor. */
     uint16_t phaseLength;           /**< length of each polyphase filter component. */
     q15_t *pCoeffs;                 /**< points to the coefficient array. The array is of length L*phaseLength. */
-    q15_t *pState;                  /**< points to the state variable array. The array is of length blockSize + phaseLength-1. */
+    q15_t *pState;                  /**< points to the state variable array. The array is of length blockSize+phaseLength-1. */
   } arm_fir_interpolate_instance_q15;
 
   /**
@@ -3321,7 +3445,7 @@ void arm_rfft_fast_f32(
     uint8_t L;                      /**< upsample factor. */
     uint16_t phaseLength;           /**< length of each polyphase filter component. */
     q31_t *pCoeffs;                 /**< points to the coefficient array. The array is of length L*phaseLength. */
-    q31_t *pState;                  /**< points to the state variable array. The array is of length blockSize + phaseLength-1. */
+    q31_t *pState;                  /**< points to the state variable array. The array is of length blockSize+phaseLength-1. */
   } arm_fir_interpolate_instance_q31;
 
   /**
@@ -3332,7 +3456,7 @@ void arm_rfft_fast_f32(
     uint8_t L;                     /**< upsample factor. */
     uint16_t phaseLength;          /**< length of each polyphase filter component. */
     float32_t *pCoeffs;            /**< points to the coefficient array. The array is of length L*phaseLength. */
-    float32_t *pState;             /**< points to the state variable array. The array is of length phaseLength + numTaps-1. */
+    float32_t *pState;             /**< points to the state variable array. The array is of length phaseLength+numTaps-1. */
   } arm_fir_interpolate_instance_f32;
 
 
@@ -3714,9 +3838,9 @@ void arm_rfft_fast_f32(
   typedef struct
   {
     uint16_t numStages;                  /**< number of stages in the filter. */
-    q15_t *pState;                       /**< points to the state variable array. The array is of length numStages + blockSize. */
+    q15_t *pState;                       /**< points to the state variable array. The array is of length numStages+blockSize. */
     q15_t *pkCoeffs;                     /**< points to the reflection coefficient array. The array is of length numStages. */
-    q15_t *pvCoeffs;                     /**< points to the ladder coefficient array. The array is of length numStages + 1. */
+    q15_t *pvCoeffs;                     /**< points to the ladder coefficient array. The array is of length numStages+1. */
   } arm_iir_lattice_instance_q15;
 
   /**
@@ -3725,9 +3849,9 @@ void arm_rfft_fast_f32(
   typedef struct
   {
     uint16_t numStages;                  /**< number of stages in the filter. */
-    q31_t *pState;                       /**< points to the state variable array. The array is of length numStages + blockSize. */
+    q31_t *pState;                       /**< points to the state variable array. The array is of length numStages+blockSize. */
     q31_t *pkCoeffs;                     /**< points to the reflection coefficient array. The array is of length numStages. */
-    q31_t *pvCoeffs;                     /**< points to the ladder coefficient array. The array is of length numStages + 1. */
+    q31_t *pvCoeffs;                     /**< points to the ladder coefficient array. The array is of length numStages+1. */
   } arm_iir_lattice_instance_q31;
 
   /**
@@ -3736,9 +3860,9 @@ void arm_rfft_fast_f32(
   typedef struct
   {
     uint16_t numStages;                  /**< number of stages in the filter. */
-    float32_t *pState;                   /**< points to the state variable array. The array is of length numStages + blockSize. */
+    float32_t *pState;                   /**< points to the state variable array. The array is of length numStages+blockSize. */
     float32_t *pkCoeffs;                 /**< points to the reflection coefficient array. The array is of length numStages. */
-    float32_t *pvCoeffs;                 /**< points to the ladder coefficient array. The array is of length numStages + 1. */
+    float32_t *pvCoeffs;                 /**< points to the ladder coefficient array. The array is of length numStages+1. */
   } arm_iir_lattice_instance_f32;
 
 
@@ -3761,8 +3885,8 @@ void arm_rfft_fast_f32(
    * @param[in] S          points to an instance of the floating-point IIR lattice structure.
    * @param[in] numStages  number of stages in the filter.
    * @param[in] pkCoeffs   points to the reflection coefficient buffer.  The array is of length numStages.
-   * @param[in] pvCoeffs   points to the ladder coefficient buffer.  The array is of length numStages + 1.
-   * @param[in] pState     points to the state buffer.  The array is of length numStages + blockSize-1.
+   * @param[in] pvCoeffs   points to the ladder coefficient buffer.  The array is of length numStages+1.
+   * @param[in] pState     points to the state buffer.  The array is of length numStages+blockSize-1.
    * @param[in] blockSize  number of samples to process.
    */
   void arm_iir_lattice_init_f32(
@@ -3793,8 +3917,8 @@ void arm_rfft_fast_f32(
    * @param[in] S          points to an instance of the Q31 IIR lattice structure.
    * @param[in] numStages  number of stages in the filter.
    * @param[in] pkCoeffs   points to the reflection coefficient buffer.  The array is of length numStages.
-   * @param[in] pvCoeffs   points to the ladder coefficient buffer.  The array is of length numStages + 1.
-   * @param[in] pState     points to the state buffer.  The array is of length numStages + blockSize.
+   * @param[in] pvCoeffs   points to the ladder coefficient buffer.  The array is of length numStages+1.
+   * @param[in] pState     points to the state buffer.  The array is of length numStages+blockSize.
    * @param[in] blockSize  number of samples to process.
    */
   void arm_iir_lattice_init_q31(
@@ -3825,8 +3949,8 @@ void arm_rfft_fast_f32(
  * @param[in] S          points to an instance of the fixed-point Q15 IIR lattice structure.
  * @param[in] numStages  number of stages in the filter.
  * @param[in] pkCoeffs   points to reflection coefficient buffer.  The array is of length numStages.
- * @param[in] pvCoeffs   points to ladder coefficient buffer.  The array is of length numStages + 1.
- * @param[in] pState     points to state buffer.  The array is of length numStages + blockSize.
+ * @param[in] pvCoeffs   points to ladder coefficient buffer.  The array is of length numStages+1.
+ * @param[in] pState     points to state buffer.  The array is of length numStages+blockSize.
  * @param[in] blockSize  number of samples to process per call.
  */
   void arm_iir_lattice_init_q15(
@@ -3844,7 +3968,7 @@ void arm_rfft_fast_f32(
   typedef struct
   {
     uint16_t numTaps;    /**< number of coefficients in the filter. */
-    float32_t *pState;   /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    float32_t *pState;   /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
     float32_t *pCoeffs;  /**< points to the coefficient array. The array is of length numTaps. */
     float32_t mu;        /**< step size that controls filter coefficient updates. */
   } arm_lms_instance_f32;
@@ -3892,7 +4016,7 @@ void arm_rfft_fast_f32(
   typedef struct
   {
     uint16_t numTaps;    /**< number of coefficients in the filter. */
-    q15_t *pState;       /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    q15_t *pState;       /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
     q15_t *pCoeffs;      /**< points to the coefficient array. The array is of length numTaps. */
     q15_t mu;            /**< step size that controls filter coefficient updates. */
     uint32_t postShift;  /**< bit shift applied to coefficients. */
@@ -3943,7 +4067,7 @@ void arm_rfft_fast_f32(
   typedef struct
   {
     uint16_t numTaps;    /**< number of coefficients in the filter. */
-    q31_t *pState;       /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    q31_t *pState;       /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
     q31_t *pCoeffs;      /**< points to the coefficient array. The array is of length numTaps. */
     q31_t mu;            /**< step size that controls filter coefficient updates. */
     uint32_t postShift;  /**< bit shift applied to coefficients. */
@@ -3994,7 +4118,7 @@ void arm_rfft_fast_f32(
   typedef struct
   {
     uint16_t numTaps;     /**< number of coefficients in the filter. */
-    float32_t *pState;    /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    float32_t *pState;    /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
     float32_t *pCoeffs;   /**< points to the coefficient array. The array is of length numTaps. */
     float32_t mu;         /**< step size that control filter coefficient updates. */
     float32_t energy;     /**< saves previous frame energy. */
@@ -4044,7 +4168,7 @@ void arm_rfft_fast_f32(
   typedef struct
   {
     uint16_t numTaps;     /**< number of coefficients in the filter. */
-    q31_t *pState;        /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    q31_t *pState;        /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
     q31_t *pCoeffs;       /**< points to the coefficient array. The array is of length numTaps. */
     q31_t mu;             /**< step size that controls filter coefficient updates. */
     uint8_t postShift;    /**< bit shift applied to coefficients. */
@@ -4098,7 +4222,7 @@ void arm_rfft_fast_f32(
   typedef struct
   {
     uint16_t numTaps;     /**< Number of coefficients in the filter. */
-    q15_t *pState;        /**< points to the state variable array. The array is of length numTaps + blockSize-1. */
+    q15_t *pState;        /**< points to the state variable array. The array is of length numTaps+blockSize-1. */
     q15_t *pCoeffs;       /**< points to the coefficient array. The array is of length numTaps. */
     q15_t mu;             /**< step size that controls filter coefficient updates. */
     uint8_t postShift;    /**< bit shift applied to coefficients. */
@@ -4307,7 +4431,7 @@ void arm_rfft_fast_f32(
   {
     uint16_t numTaps;             /**< number of coefficients in the filter. */
     uint16_t stateIndex;          /**< state buffer index.  Points to the oldest sample in the state buffer. */
-    float32_t *pState;            /**< points to the state buffer array. The array is of length maxDelay + blockSize-1. */
+    float32_t *pState;            /**< points to the state buffer array. The array is of length maxDelay+blockSize-1. */
     float32_t *pCoeffs;           /**< points to the coefficient array. The array is of length numTaps.*/
     uint16_t maxDelay;            /**< maximum offset specified by the pTapDelay array. */
     int32_t *pTapDelay;           /**< points to the array of delay values.  The array is of length numTaps. */
@@ -4320,7 +4444,7 @@ void arm_rfft_fast_f32(
   {
     uint16_t numTaps;             /**< number of coefficients in the filter. */
     uint16_t stateIndex;          /**< state buffer index.  Points to the oldest sample in the state buffer. */
-    q31_t *pState;                /**< points to the state buffer array. The array is of length maxDelay + blockSize-1. */
+    q31_t *pState;                /**< points to the state buffer array. The array is of length maxDelay+blockSize-1. */
     q31_t *pCoeffs;               /**< points to the coefficient array. The array is of length numTaps.*/
     uint16_t maxDelay;            /**< maximum offset specified by the pTapDelay array. */
     int32_t *pTapDelay;           /**< points to the array of delay values.  The array is of length numTaps. */
@@ -4333,7 +4457,7 @@ void arm_rfft_fast_f32(
   {
     uint16_t numTaps;             /**< number of coefficients in the filter. */
     uint16_t stateIndex;          /**< state buffer index.  Points to the oldest sample in the state buffer. */
-    q15_t *pState;                /**< points to the state buffer array. The array is of length maxDelay + blockSize-1. */
+    q15_t *pState;                /**< points to the state buffer array. The array is of length maxDelay+blockSize-1. */
     q15_t *pCoeffs;               /**< points to the coefficient array. The array is of length numTaps.*/
     uint16_t maxDelay;            /**< maximum offset specified by the pTapDelay array. */
     int32_t *pTapDelay;           /**< points to the array of delay values.  The array is of length numTaps. */
@@ -4346,7 +4470,7 @@ void arm_rfft_fast_f32(
   {
     uint16_t numTaps;             /**< number of coefficients in the filter. */
     uint16_t stateIndex;          /**< state buffer index.  Points to the oldest sample in the state buffer. */
-    q7_t *pState;                 /**< points to the state buffer array. The array is of length maxDelay + blockSize-1. */
+    q7_t *pState;                 /**< points to the state buffer array. The array is of length maxDelay+blockSize-1. */
     q7_t *pCoeffs;                /**< points to the coefficient array. The array is of length numTaps.*/
     uint16_t maxDelay;            /**< maximum offset specified by the pTapDelay array. */
     int32_t *pTapDelay;           /**< points to the array of delay values.  The array is of length numTaps. */
@@ -5320,12 +5444,12 @@ void arm_rfft_fast_f32(
     /* Calculation of index */
     i = (int32_t) ((x - S->x1) / xSpacing);
 
-    if (i < 0)
+    if(i < 0)
     {
       /* Iniatilize output for below specified range as least output value of table */
       y = pYData[0];
     }
-    else if ((uint32_t)i >= S->nValues)
+    else if((uint32_t)i >= S->nValues)
     {
       /* Iniatilize output for above specified range as last output value of table */
       y = pYData[S->nValues - 1];
@@ -5378,11 +5502,11 @@ void arm_rfft_fast_f32(
     /* Index value calculation */
     index = ((x & (q31_t)0xFFF00000) >> 20);
 
-    if (index >= (int32_t)(nValues - 1))
+    if(index >= (int32_t)(nValues - 1))
     {
       return (pYData[nValues - 1]);
     }
-    else if (index < 0)
+    else if(index < 0)
     {
       return (pYData[0]);
     }
@@ -5436,11 +5560,11 @@ void arm_rfft_fast_f32(
     /* Index value calculation */
     index = ((x & (int32_t)0xFFF00000) >> 20);
 
-    if (index >= (int32_t)(nValues - 1))
+    if(index >= (int32_t)(nValues - 1))
     {
       return (pYData[nValues - 1]);
     }
-    else if (index < 0)
+    else if(index < 0)
     {
       return (pYData[0]);
     }
@@ -5497,7 +5621,7 @@ void arm_rfft_fast_f32(
     }
     index = (x >> 20) & 0xfff;
 
-    if (index >= (nValues - 1))
+    if(index >= (nValues - 1))
     {
       return (pYData[nValues - 1]);
     }
@@ -5622,7 +5746,7 @@ void arm_rfft_fast_f32(
   float32_t in,
   float32_t * pOut)
   {
-    if (in >= 0.0f)
+    if(in >= 0.0f)
     {
 
 #if   (__FPU_USED == 1) && defined ( __CC_ARM   )
@@ -5697,7 +5821,7 @@ void arm_rfft_fast_f32(
     /* Loop over the blockSize */
     i = blockSize;
 
-    while (i > 0u)
+    while(i > 0u)
     {
       /* copy the input sample to the circular buffer */
       circBuffer[wOffset] = *src;
@@ -5707,7 +5831,7 @@ void arm_rfft_fast_f32(
 
       /* Circularly update wOffset.  Watch out for positive and negative value */
       wOffset += bufferInc;
-      if (wOffset >= L)
+      if(wOffset >= L)
         wOffset -= L;
 
       /* Decrement the loop counter */
@@ -5745,7 +5869,7 @@ void arm_rfft_fast_f32(
     /* Loop over the blockSize */
     i = blockSize;
 
-    while (i > 0u)
+    while(i > 0u)
     {
       /* copy the sample from the circular buffer to the destination buffer */
       *dst = circBuffer[rOffset];
@@ -5753,7 +5877,7 @@ void arm_rfft_fast_f32(
       /* Update the input pointer */
       dst += dstInc;
 
-      if (dst == (int32_t *) dst_end)
+      if(dst == (int32_t *) dst_end)
       {
         dst = dst_base;
       }
@@ -5761,7 +5885,7 @@ void arm_rfft_fast_f32(
       /* Circularly update rOffset.  Watch out for positive and negative value  */
       rOffset += bufferInc;
 
-      if (rOffset >= L)
+      if(rOffset >= L)
       {
         rOffset -= L;
       }
@@ -5797,7 +5921,7 @@ void arm_rfft_fast_f32(
     /* Loop over the blockSize */
     i = blockSize;
 
-    while (i > 0u)
+    while(i > 0u)
     {
       /* copy the input sample to the circular buffer */
       circBuffer[wOffset] = *src;
@@ -5807,7 +5931,7 @@ void arm_rfft_fast_f32(
 
       /* Circularly update wOffset.  Watch out for positive and negative value */
       wOffset += bufferInc;
-      if (wOffset >= L)
+      if(wOffset >= L)
         wOffset -= L;
 
       /* Decrement the loop counter */
@@ -5845,7 +5969,7 @@ void arm_rfft_fast_f32(
     /* Loop over the blockSize */
     i = blockSize;
 
-    while (i > 0u)
+    while(i > 0u)
     {
       /* copy the sample from the circular buffer to the destination buffer */
       *dst = circBuffer[rOffset];
@@ -5853,7 +5977,7 @@ void arm_rfft_fast_f32(
       /* Update the input pointer */
       dst += dstInc;
 
-      if (dst == (q15_t *) dst_end)
+      if(dst == (q15_t *) dst_end)
       {
         dst = dst_base;
       }
@@ -5861,7 +5985,7 @@ void arm_rfft_fast_f32(
       /* Circularly update wOffset.  Watch out for positive and negative value */
       rOffset += bufferInc;
 
-      if (rOffset >= L)
+      if(rOffset >= L)
       {
         rOffset -= L;
       }
@@ -5897,7 +6021,7 @@ void arm_rfft_fast_f32(
     /* Loop over the blockSize */
     i = blockSize;
 
-    while (i > 0u)
+    while(i > 0u)
     {
       /* copy the input sample to the circular buffer */
       circBuffer[wOffset] = *src;
@@ -5907,7 +6031,7 @@ void arm_rfft_fast_f32(
 
       /* Circularly update wOffset.  Watch out for positive and negative value */
       wOffset += bufferInc;
-      if (wOffset >= L)
+      if(wOffset >= L)
         wOffset -= L;
 
       /* Decrement the loop counter */
@@ -5945,7 +6069,7 @@ void arm_rfft_fast_f32(
     /* Loop over the blockSize */
     i = blockSize;
 
-    while (i > 0u)
+    while(i > 0u)
     {
       /* copy the sample from the circular buffer to the destination buffer */
       *dst = circBuffer[rOffset];
@@ -5953,7 +6077,7 @@ void arm_rfft_fast_f32(
       /* Update the input pointer */
       dst += dstInc;
 
-      if (dst == (q7_t *) dst_end)
+      if(dst == (q7_t *) dst_end)
       {
         dst = dst_base;
       }
@@ -5961,7 +6085,7 @@ void arm_rfft_fast_f32(
       /* Circularly update rOffset.  Watch out for positive and negative value */
       rOffset += bufferInc;
 
-      if (rOffset >= L)
+      if(rOffset >= L)
       {
         rOffset -= L;
       }
@@ -6599,9 +6723,9 @@ void arm_rfft_fast_f32(
    * The interpolated output point is computed as:
    * <pre>
    *  f(x, y) = f(XF, YF) * (1-(x-XF)) * (1-(y-YF))
-   *           + f(XF + 1, YF) * (x-XF)*(1-(y-YF))
-   *           + f(XF, YF + 1) * (1-(x-XF))*(y-YF)
-   *           + f(XF + 1, YF + 1) * (x-XF)*(y-YF)
+   *           + f(XF+1, YF) * (x-XF)*(1-(y-YF))
+   *           + f(XF, YF+1) * (1-(x-XF))*(y-YF)
+   *           + f(XF+1, YF+1) * (x-XF)*(y-YF)
    * </pre>
    * Note that the coordinates (x, y) contain integer and fractional components.
    * The integer components specify which portion of the table to use while the
@@ -6642,7 +6766,7 @@ void arm_rfft_fast_f32(
 
     /* Care taken for table outside boundary */
     /* Returns zero output when values are outside table boundary */
-    if (xIndex < 0 || xIndex > (S->numRows - 1) || yIndex < 0 || yIndex > (S->numCols - 1))
+    if(xIndex < 0 || xIndex > (S->numRows - 1) || yIndex < 0 || yIndex > (S->numCols - 1))
     {
       return (0);
     }
@@ -6716,7 +6840,7 @@ void arm_rfft_fast_f32(
 
     /* Care taken for table outside boundary */
     /* Returns zero output when values are outside table boundary */
-    if (rI < 0 || rI > (S->numRows - 1) || cI < 0 || cI > (S->numCols - 1))
+    if(rI < 0 || rI > (S->numRows - 1) || cI < 0 || cI > (S->numCols - 1))
     {
       return (0);
     }
@@ -6790,7 +6914,7 @@ void arm_rfft_fast_f32(
 
     /* Care taken for table outside boundary */
     /* Returns zero output when values are outside table boundary */
-    if (rI < 0 || rI > (S->numRows - 1) || cI < 0 || cI > (S->numCols - 1))
+    if(rI < 0 || rI > (S->numRows - 1) || cI < 0 || cI > (S->numCols - 1))
     {
       return (0);
     }
@@ -6868,7 +6992,7 @@ void arm_rfft_fast_f32(
 
     /* Care taken for table outside boundary */
     /* Returns zero output when values are outside table boundary */
-    if (rI < 0 || rI > (S->numRows - 1) || cI < 0 || cI > (S->numCols - 1))
+    if(rI < 0 || rI > (S->numRows - 1) || cI < 0 || cI > (S->numCols - 1))
     {
       return (0);
     }

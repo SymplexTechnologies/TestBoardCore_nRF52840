@@ -28,9 +28,6 @@
 extern "C" {
 #endif
 
-static uint32_t saadcReference = SAADC_CH_CONFIG_REFSEL_Internal;
-static uint32_t saadcGain      = SAADC_CH_CONFIG_GAIN_Gain1_5;
-
 #define PWM_COUNT 3
 
 static NRF_PWM_Type* pwms[PWM_COUNT] = {
@@ -44,6 +41,8 @@ static uint32_t pwmChannelPins[PWM_COUNT] = {
   0xFFFFFFFF,
   0xFFFFFFFF
 };
+
+static uint32_t saadcReference = SAADC_CH_CONFIG_REFSEL_Internal;
 static uint16_t pwmChannelSequence[PWM_COUNT];
 
 static int readResolution = 10;
@@ -77,7 +76,7 @@ static inline uint32_t mapResolution( uint32_t value, uint32_t from, uint32_t to
 }
 
 /*
- * Internal Reference is at 0.6v!
+ * Internal Reference is at 1.0v
  * External Reference should be between 1v and VDDANA-0.6v=2.7v
  *
  * Warning : On Arduino Zero board the input/output voltage for SAMD21G18 is 3.3 volts maximum
@@ -89,12 +88,10 @@ void analogReference( eAnalogReference ulMode )
     case AR_INTERNAL:
     default:
       saadcReference = SAADC_CH_CONFIG_REFSEL_Internal;
-      saadcGain      = SAADC_CH_CONFIG_GAIN_Gain1_5;
       break;
 
     case AR_VDD4:
       saadcReference = SAADC_CH_CONFIG_REFSEL_VDD1_4;
-      saadcGain      = SAADC_CH_CONFIG_GAIN_Gain1_4;
       break;
   }
 }
@@ -110,7 +107,11 @@ uint32_t analogRead( uint32_t ulPin )
     return 0;
   }
 
-  ulPin = g_ADigitalPinMap[ulPin];
+  #ifdef NRF52840
+    ulPin = g_ADigitalPinMap[ulPin].ulPin;
+  #else
+    ulPin = g_ADigitalPinMap[ulPin];
+  #endif
 
   switch ( ulPin ) {
     case 2:
@@ -170,9 +171,9 @@ uint32_t analogRead( uint32_t ulPin )
     NRF_SAADC->CH[i].PSELN = SAADC_CH_PSELP_PSELP_NC;
     NRF_SAADC->CH[i].PSELP = SAADC_CH_PSELP_PSELP_NC;
   }
-  NRF_SAADC->CH[0].CONFIG =   ((SAADC_CH_CONFIG_RESP_Bypass   << SAADC_CH_CONFIG_RESP_Pos)   & SAADC_CH_CONFIG_RESP_Msk)
+  NRF_SAADC->CH[0].CONFIG = ((SAADC_CH_CONFIG_RESP_Bypass   << SAADC_CH_CONFIG_RESP_Pos)   & SAADC_CH_CONFIG_RESP_Msk)
                             | ((SAADC_CH_CONFIG_RESP_Bypass   << SAADC_CH_CONFIG_RESN_Pos)   & SAADC_CH_CONFIG_RESN_Msk)
-                            | ((saadcGain                     << SAADC_CH_CONFIG_GAIN_Pos)   & SAADC_CH_CONFIG_GAIN_Msk)
+                            | ((SAADC_CH_CONFIG_GAIN_Gain1    << SAADC_CH_CONFIG_GAIN_Pos)   & SAADC_CH_CONFIG_GAIN_Msk)
                             | ((saadcReference                << SAADC_CH_CONFIG_REFSEL_Pos) & SAADC_CH_CONFIG_REFSEL_Msk)
                             | ((SAADC_CH_CONFIG_TACQ_3us      << SAADC_CH_CONFIG_TACQ_Pos)   & SAADC_CH_CONFIG_TACQ_Msk)
                             | ((SAADC_CH_CONFIG_MODE_SE       << SAADC_CH_CONFIG_MODE_Pos)   & SAADC_CH_CONFIG_MODE_Msk);
@@ -217,7 +218,11 @@ void analogWrite( uint32_t ulPin, uint32_t ulValue )
     return;
   }
 
-  ulPin = g_ADigitalPinMap[ulPin];
+  #ifdef NRF52840
+    ulPin = g_ADigitalPinMap[ulPin].ulPin;
+  #else
+    ulPin = g_ADigitalPinMap[ulPin];
+  #endif
 
   for (int i = 0; i < PWM_COUNT; i++) {
     if (pwmChannelPins[i] == 0xFFFFFFFF || pwmChannelPins[i] == ulPin) {

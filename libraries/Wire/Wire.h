@@ -28,7 +28,9 @@
 
 #include "RingBuffer.h"
 
-// WIRE_HAS_END means Wire has end()
+#define BUFFER_LENGTH 32
+
+ // WIRE_HAS_END means Wire has end()
 #define WIRE_HAS_END 1
 
 class TwoWire : public Stream
@@ -37,7 +39,7 @@ class TwoWire : public Stream
 #ifdef NRF52
     TwoWire(NRF_TWIM_Type * p_twim, NRF_TWIS_Type * p_twis, IRQn_Type IRQn, uint8_t pinSDA, uint8_t pinSCL);
 #else
-    TwoWire(NRF_TWI_Type * p_twi, uint8_t pinSDA, uint8_t pinSCL);
+    TwoWire(NRF_TWI_Type * p_twi, IRQn_Type IRQn, uint8_t pinSDA, uint8_t pinSCL);
 #endif
     void begin();
 #ifdef NRF52
@@ -63,10 +65,11 @@ class TwoWire : public Stream
 #ifdef NRF52
     void onReceive(void(*)(int));
     void onRequest(void(*)(void));
-    void onService(void);
 #endif
 
     using Print::write;
+
+    void onService(void);
 
   private:
 #ifdef NRF52
@@ -88,7 +91,7 @@ class TwoWire : public Stream
     // RX Buffer
     RingBuffer rxBuffer;
 
-    // TX buffer
+    //TX buffer
     RingBuffer txBuffer;
     uint8_t txAddress;
 
