@@ -20,6 +20,29 @@ menu.softdevice=Softdevice
 menu.version=Version
 menu.lfclk=Low Frequency Clock
 
+
+
+
+nRF52840DK.name=My nRF52840 DK
+
+nRF52840DK.vid.0=0x1366
+nRF52840DK.pid.0=0x1015
+
+nRF52840DK.build.mcu=cortex-m4
+nRF52840DK.build.f_cpu=16000000
+nRF52840DK.build.board=NRF52840_DK_C
+nRF52840DK.build.core=nRF5
+nRF52840DK.build.variant=nRF52840DK_C
+nRF52840DK.build.variant_system_lib=
+nRF52840DK.build.extra_flags=-DNRF52 -DNRF52840 -DNRF52840_XXAA
+nRF52840DK.build.float_flags=-mfloat-abi=hard -mfpu=fpv4-sp-d16
+nRF52840DK.build.ldscript=nrf52840_xxaa.ld
+
+
+
+
+
+
 nRF52DK.name=nRF52 DK
 
 nRF52DK.vid.0=0x1366
@@ -65,6 +88,8 @@ nRF52DK.menu.lfclk.lfsynt=Synthesized
 nRF52DK.menu.lfclk.lfsynt.build.lfclk_flags=-DUSE_LFSYNT
 
 
+
+
 nRF52840DK.name=nRF52840 DK
 
 nRF52840DK.vid.0=0x1366
@@ -74,7 +99,7 @@ nRF52840DK.upload.tool=sandeepmistry:openocd
 nRF52840DK.upload.protocol=
 nRF52840DK.upload.interface=jlink
 nRF52840DK.upload.target=nrf52
-nRF52840DK.upload.maximum_size=524288
+nRF52840DK.upload.maximum_size=1048576
 nRF52840DK.upload.setup_command=transport select swd;
 nRF52840DK.upload.use_1200bps_touch=false
 nRF52840DK.upload.wait_for_upload_port=false
@@ -90,7 +115,7 @@ nRF52840DK.build.variant=nRF52840DK
 nRF52840DK.build.variant_system_lib=
 nRF52840DK.build.extra_flags=-DNRF52 -DNRF52840 -DNRF52840_XXAA
 nRF52840DK.build.float_flags=-mfloat-abi=hard -mfpu=fpv4-sp-d16
-nRF52840DK.build.ldscript=nrf52_xxaa.ld
+nRF52840DK.build.ldscript=nrf52840_xxaa.ld
 
 nRF52840DK.menu.softdevice.none=None
 nRF52840DK.menu.softdevice.none.softdevice=none
@@ -109,165 +134,7 @@ nRF52840DK.menu.lfclk.lfrc.build.lfclk_flags=-DUSE_LFRC
 nRF52840DK.menu.lfclk.lfsynt=Synthesized
 nRF52840DK.menu.lfclk.lfsynt.build.lfclk_flags=-DUSE_LFSYNT
 
-BluzDK.name=Bluz DK
 
-BluzDK.upload.tool=sandeepmistry:openocd
-BluzDK.upload.target=nrf51
-BluzDK.upload.maximum_size=262144
-
-BluzDK.bootloader.tool=sandeepmistry:openocd
-
-BluzDK.build.mcu=cortex-m0
-BluzDK.build.f_cpu=16000000
-BluzDK.build.board=BLUZ_DK
-BluzDK.build.core=nRF5
-BluzDK.build.variant=BluzDK
-BluzDK.build.variant_system_lib=
-BluzDK.build.extra_flags=-DNRF51
-BluzDK.build.float_flags=
-BluzDK.build.ldscript=nrf51_xxac.ld
-
-BluzDK.menu.softdevice.none=None
-BluzDK.menu.softdevice.none.softdevice=none
-
-BluzDK.menu.softdevice.s110=S110
-BluzDK.menu.softdevice.s110.softdevice=s110
-BluzDK.menu.softdevice.s110.softdeviceversion=8.0.0
-BluzDK.menu.softdevice.s110.upload.maximum_size=151552
-BluzDK.menu.softdevice.s110.build.extra_flags=-DNRF51 -DS110 -DNRF51_S110
-BluzDK.menu.softdevice.s110.build.ldscript=armgcc_s110_nrf51822_xxac.ld
-
-BluzDK.menu.softdevice.s130=S130
-BluzDK.menu.softdevice.s130.softdevice=s130
-BluzDK.menu.softdevice.s130.softdeviceversion=2.0.1
-BluzDK.menu.softdevice.s130.upload.maximum_size=151552
-BluzDK.menu.softdevice.s130.build.extra_flags=-DNRF51 -DS130 -DNRF51_S130
-BluzDK.menu.softdevice.s130.build.ldscript=armgcc_s130_nrf51822_xxac.ld
-
-
-BLENano.name=RedBearLab BLE Nano
-
-BLENano.upload.tool=sandeepmistry:openocd
-BLENano.upload.interface=cmsisdap
-BLENano.upload.target=nrf51
-BLENano.upload.maximum_size=262144
-
-BLENano.bootloader.tool=sandeepmistry:openocd
-
-BLENano.build.mcu=cortex-m0
-BLENano.build.f_cpu=16000000
-BLENano.build.board=BLE_NANO
-BLENano.build.core=nRF5
-BLENano.build.variant=BLENano
-BLENano.build.variant_system_lib=
-BLENano.build.extra_flags=-DNRF51
-BLENano.build.float_flags=
-BLENano.build.ldscript=nrf51_{build.chip}.ld
-
-BLENano.menu.version.1_0=1.0
-BLENano.menu.version.1_0.build.chip=xxaa
-BLENano.menu.version.1_5=1.5
-BLENano.menu.version.1_5.build.chip=xxac
-
-BLENano.menu.softdevice.none=None
-BLENano.menu.softdevice.none.softdevice=none
-
-BLENano.menu.softdevice.s110=S110
-BLENano.menu.softdevice.s110.softdevice=s110
-BLENano.menu.softdevice.s110.softdeviceversion=8.0.0
-BLENano.menu.softdevice.s110.upload.maximum_size=151552
-BLENano.menu.softdevice.s110.build.extra_flags=-DNRF51 -DS110 -DNRF51_S110
-BLENano.menu.softdevice.s110.build.ldscript=armgcc_s110_nrf51822_{build.chip}.ld
-
-BLENano.menu.softdevice.s130=S130
-BLENano.menu.softdevice.s130.softdevice=s130
-BLENano.menu.softdevice.s130.softdeviceversion=2.0.1
-BLENano.menu.softdevice.s130.upload.maximum_size=151552
-BLENano.menu.softdevice.s130.build.extra_flags=-DNRF51 -DS130 -DNRF51_S130
-BLENano.menu.softdevice.s130.build.ldscript=armgcc_s130_nrf51822_{build.chip}.ld
-
-
-RedBearLab_nRF51822.name=RedBearLab nRF51822
-
-RedBearLab_nRF51822.upload.tool=sandeepmistry:openocd
-RedBearLab_nRF51822.upload.interface=cmsisdap
-RedBearLab_nRF51822.upload.target=nrf51
-RedBearLab_nRF51822.upload.maximum_size=262144
-
-RedBearLab_nRF51822.bootloader.tool=sandeepmistry:openocd
-
-RedBearLab_nRF51822.build.mcu=cortex-m0
-RedBearLab_nRF51822.build.f_cpu=16000000
-RedBearLab_nRF51822.build.board=REDBEARLAB_NRF51822
-RedBearLab_nRF51822.build.core=nRF5
-RedBearLab_nRF51822.build.variant=RedBearLab_nRF51822
-RedBearLab_nRF51822.build.variant_system_lib=
-RedBearLab_nRF51822.build.extra_flags=-DNRF51
-RedBearLab_nRF51822.build.float_flags=
-RedBearLab_nRF51822.build.ldscript=nrf51_{build.chip}.ld
-
-RedBearLab_nRF51822.menu.version.1_0=1.0
-RedBearLab_nRF51822.menu.version.1_0.build.chip=xxaa
-RedBearLab_nRF51822.menu.version.1_5=1.5
-RedBearLab_nRF51822.menu.version.1_5.build.chip=xxac
-
-RedBearLab_nRF51822.menu.softdevice.none=None
-RedBearLab_nRF51822.menu.softdevice.none.softdevice=none
-
-RedBearLab_nRF51822.menu.softdevice.s110=S110
-RedBearLab_nRF51822.menu.softdevice.s110.softdevice=s110
-RedBearLab_nRF51822.menu.softdevice.s110.softdeviceversion=8.0.0
-RedBearLab_nRF51822.menu.softdevice.s110.upload.maximum_size=151552
-RedBearLab_nRF51822.menu.softdevice.s110.build.extra_flags=-DNRF51 -DS110 -DNRF51_S110
-RedBearLab_nRF51822.menu.softdevice.s110.build.ldscript=armgcc_s110_nrf51822_{build.chip}.ld
-
-RedBearLab_nRF51822.menu.softdevice.s130=S130
-RedBearLab_nRF51822.menu.softdevice.s130.softdevice=s130
-RedBearLab_nRF51822.menu.softdevice.s130.softdeviceversion=2.0.1
-RedBearLab_nRF51822.menu.softdevice.s130.upload.maximum_size=151552
-RedBearLab_nRF51822.menu.softdevice.s130.build.extra_flags=-DNRF51 -DS130 -DNRF51_S130
-RedBearLab_nRF51822.menu.softdevice.s130.build.ldscript=armgcc_s130_nrf51822_{build.chip}.ld
-
-
-BBCmicrobit.name=BBC micro:bit
-
-BBCmicrobit.vid.0=0x0d28
-BBCmicrobit.pid.0=0x0204
-
-BBCmicrobit.upload.tool=sandeepmistry:openocd
-BBCmicrobit.upload.target=nrf51
-BBCmicrobit.upload.maximum_size=262144
-
-BBCmicrobit.bootloader.tool=sandeepmistry:openocd
-
-BBCmicrobit.build.mcu=cortex-m0
-BBCmicrobit.build.f_cpu=16000000
-BBCmicrobit.build.board=BLUZ_DK
-BBCmicrobit.build.core=nRF5
-BBCmicrobit.build.variant=BBCmicrobit
-BBCmicrobit.build.variant_system_lib=
-BBCmicrobit.build.extra_flags=-DNRF51
-BBCmicrobit.build.float_flags=
-BBCmicrobit.build.ldscript=nrf51_xxaa.ld
-
-BBCmicrobit.build.lfclk_flags=-DUSE_LFRC
-
-BBCmicrobit.menu.softdevice.none=None
-BBCmicrobit.menu.softdevice.none.softdevice=none
-
-BBCmicrobit.menu.softdevice.s110=S110
-BBCmicrobit.menu.softdevice.s110.softdevice=s110
-BBCmicrobit.menu.softdevice.s110.softdeviceversion=8.0.0
-BBCmicrobit.menu.softdevice.s110.upload.maximum_size=151552
-BBCmicrobit.menu.softdevice.s110.build.extra_flags=-DNRF51 -DS110 -DNRF51_S110
-BBCmicrobit.menu.softdevice.s110.build.ldscript=armgcc_s110_nrf51822_xxaa.ld
-
-BBCmicrobit.menu.softdevice.s130=S130
-BBCmicrobit.menu.softdevice.s130.softdevice=s130
-BBCmicrobit.menu.softdevice.s130.softdeviceversion=2.0.1
-BBCmicrobit.menu.softdevice.s130.upload.maximum_size=151552
-BBCmicrobit.menu.softdevice.s130.build.extra_flags=-DNRF51 -DS130 -DNRF51_S130
-BBCmicrobit.menu.softdevice.s130.build.ldscript=armgcc_s130_nrf51822_xxaa.ld
 
 
 Generic_nRF51822.name=Generic nRF51822
@@ -316,82 +183,3 @@ Generic_nRF51822.menu.lfclk.lfrc=RC Oscillator
 Generic_nRF51822.menu.lfclk.lfrc.build.lfclk_flags=-DUSE_LFRC
 Generic_nRF51822.menu.lfclk.lfsynt=Synthesized
 Generic_nRF51822.menu.lfclk.lfsynt.build.lfclk_flags=-DUSE_LFSYNT
-
-
-Waveshare_BLE400.name=Waveshare BLE400
-
-Waveshare_BLE400.upload.tool=sandeepmistry:openocd
-Waveshare_BLE400.upload.target=nrf51
-Waveshare_BLE400.upload.maximum_size=262144
-
-Waveshare_BLE400.bootloader.tool=sandeepmistry:openocd
-
-Waveshare_BLE400.build.mcu=cortex-m0
-Waveshare_BLE400.build.f_cpu=16000000
-Waveshare_BLE400.build.board=WAVESHARE_BLE400
-Waveshare_BLE400.build.core=nRF5
-Waveshare_BLE400.build.variant=Waveshare_BLE400
-Waveshare_BLE400.build.variant_system_lib=
-Waveshare_BLE400.build.extra_flags=-DNRF51
-Waveshare_BLE400.build.float_flags=
-Waveshare_BLE400.build.ldscript=nrf51_{build.chip}.ld
-
-Waveshare_BLE400.menu.chip.xxaa=16 kB RAM, 256 kB flash (xxaa)
-Waveshare_BLE400.menu.chip.xxaa.build.chip=xxaa
-Waveshare_BLE400.menu.chip.xxac=32 kB RAM, 256 kB flash (xxac)
-Waveshare_BLE400.menu.chip.xxac.build.chip=xxac
-
-Waveshare_BLE400.menu.softdevice.none=None
-Waveshare_BLE400.menu.softdevice.none.softdevice=none
-
-Waveshare_BLE400.menu.softdevice.s110=S110
-Waveshare_BLE400.menu.softdevice.s110.softdevice=s110
-Waveshare_BLE400.menu.softdevice.s110.softdeviceversion=8.0.0
-Waveshare_BLE400.menu.softdevice.s110.upload.maximum_size=151552
-Waveshare_BLE400.menu.softdevice.s110.build.extra_flags=-DNRF51 -DS110 -DNRF51_S110
-Waveshare_BLE400.menu.softdevice.s110.build.ldscript=armgcc_s110_nrf51822_{build.chip}.ld
-
-Waveshare_BLE400.menu.softdevice.s130=S130
-Waveshare_BLE400.menu.softdevice.s130.softdevice=s130
-Waveshare_BLE400.menu.softdevice.s130.softdeviceversion=2.0.1
-Waveshare_BLE400.menu.softdevice.s130.upload.maximum_size=151552
-Waveshare_BLE400.menu.softdevice.s130.build.extra_flags=-DNRF51 -DS130 -DNRF51_S130
-Waveshare_BLE400.menu.softdevice.s130.build.ldscript=armgcc_s130_nrf51822_{build.chip}.ld
-
-
-OSHChip.name=OSHChip
-
-OSHChip.upload.tool=sandeepmistry:openocd
-OSHChip.upload.target=nrf51
-OSHChip.upload.maximum_size=262144
-
-OSHChip.bootloader.tool=sandeepmistry:openocd
-
-OSHChip.build.mcu=cortex-m0
-OSHChip.build.f_cpu=16000000
-OSHChip.build.board=BLUZ_DK
-OSHChip.build.core=nRF5
-OSHChip.build.variant=OSHChip
-OSHChip.build.variant_system_lib=
-OSHChip.build.extra_flags=-DNRF51
-OSHChip.build.float_flags=
-OSHChip.build.ldscript=nrf51_xxac.ld
-
-OSHChip.build.lfclk_flags=-DUSE_LFRC
-
-OSHChip.menu.softdevice.none=None
-OSHChip.menu.softdevice.none.softdevice=none
-
-OSHChip.menu.softdevice.s110=S110
-OSHChip.menu.softdevice.s110.softdevice=s110
-OSHChip.menu.softdevice.s110.softdeviceversion=8.0.0
-OSHChip.menu.softdevice.s110.upload.maximum_size=151552
-OSHChip.menu.softdevice.s110.build.extra_flags=-DNRF51 -DS110 -DNRF51_S110
-OSHChip.menu.softdevice.s110.build.ldscript=armgcc_s110_nrf51822_xxac.ld
-
-OSHChip.menu.softdevice.s130=S130
-OSHChip.menu.softdevice.s130.softdevice=s130
-OSHChip.menu.softdevice.s130.softdeviceversion=2.0.1
-OSHChip.menu.softdevice.s130.upload.maximum_size=151552
-OSHChip.menu.softdevice.s130.build.extra_flags=-DNRF51 -DS130 -DNRF51_S130
-OSHChip.menu.softdevice.s130.build.ldscript=armgcc_s130_nrf51822_xxac.ld
