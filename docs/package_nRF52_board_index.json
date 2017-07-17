@@ -1,8 +1,8 @@
 {
   "packages": [
     {
-      "name": "sandeepmistry",
-      "maintainer": "Sandeep Mistry",
+      "name": "Symplex Technology",
+      "maintainer": "Symplex",
       "websiteURL": "https://github.com/sandeepmistry/arduino-nRF5",
       "email": "sandeep.mistry@gmail.com",
       "help": {
