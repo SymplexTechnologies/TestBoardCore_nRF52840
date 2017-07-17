@@ -2,31 +2,29 @@
   "packages": [
     {
       "name": "SymplexTechnologies",
-      "maintainer": "SymplexTech",
-      "websiteURL": "https://github.com/sandeepmistry/arduino-nRF5",
-      "email": "sandeep.mistry@gmail.com",
+      "maintainer": "Symplex Technology",
+      "websiteURL": "https://github.com/SymplexTechnologies/TestBoardCore_nRF52840",
+      "email": "justinyonghui.kim@gmail.com",
       "help": {
-        "online": "https://github.com/sandeepmistry/arduino-nRF5/issues"
+        "online": "https://youtube.com"
       },
       "platforms": [
         {
-          "name": "Nordic Semiconductor nRF52840 Test",
-          "architecture": "nRF5",
+          "name": "Nordic Semiconductor nRF52840 Board",
+          "architecture": "nRF52",
           "version": "0.1.0",
           "category": "Contributed",
           "help": {
-            "online": "https://github.com/sandeepmistry/arduino-nRF5/issues"
+            "online": "https://youtube.com"
           },
-          "url": "https://github.com/sandeepmistry/arduino-nRF5/archive/0.2.0.tar.gz",
-          "archiveFileName": "arduino-nRF52-0.1.0.tar.gz",
-          "checksum": "MD5:1825f6420104225f5fee11b467923b7d",
-          "size": "591297",
+          "url": "https://github.com/SymplexTechnologies/TestBoardCore_nRF52840/archive/0.2.0.zip",
+          "archiveFileName": "TestBoardCore_nRF52840-0.2.0.zip",
           "boards": [
             {"name": "nRF52840 DK"}
           ],
           "toolsDependencies": [
             {
-              "packager": "sandeepmistry",
+              "packager": "SymplexTechnologies",
               "name": "gcc-arm-none-eabi",
               "version": "5_2-2015q4"
             }
@@ -39,8 +37,29 @@
           "version": "5_2-2015q4",
           "systems": [
             {
+              "host": "i386-apple-darwin11",
+              "url": "https://github.com/SymplexTechnologies/TestBoardCore_nRF52840/releases/download/Tools/gcc-arm-none-eabi-5_2-2015q4-20151219-mac.tar.bz2",
+              "archiveFileName": "gcc-arm-none-eabi-5_2-2015q4-20151219-mac.tar.bz2",
+              "size": "96372129",
+              "checksum": "MD5:603bcce8e59683ac27054b3197a53254"
+            },
+            {
+              "host": "i686-linux-gnu",
+              "url": "https://github.com/SymplexTechnologies/TestBoardCore_nRF52840/releases/download/Tools/gcc-arm-none-eabi-5_2-2015q4-20151219-linux.tar.bz2",
+              "archiveFileName": "gcc-arm-none-eabi-5_2-2015q4-20151219-linux.tar.bz2",
+              "size": "92811866",
+              "checksum": "MD5:f88caac80b4444a17344f57ccb760b90"
+            },
+            {
+              "host": "x86_64-pc-linux-gnu",
+              "url": "https://github.com/SymplexTechnologies/TestBoardCore_nRF52840/releases/download/Tools/gcc-arm-none-eabi-5_2-2015q4-20151219-linux.tar.bz2",
+              "archiveFileName": "gcc-arm-none-eabi-5_2-2015q4-20151219-linux.tar.bz2",
+              "size": "92811866",
+              "checksum": "MD5:f88caac80b4444a17344f57ccb760b90"
+            },
+            {
               "host": "i686-mingw32",
-              "url": "https://github.com/sandeepmistry/arduino-nRF5/releases/download/tools/gcc-arm-none-eabi-5_2-2015q4-20151219-win32.tar.bz2",
+              "url": "https://github.com/SymplexTechnologies/TestBoardCore_nRF52840/releases/download/Tools/gcc-arm-none-eabi-5_2-2015q4-20151219-win32.tar.bz2",
               "archiveFileName": "gcc-arm-none-eabi-5_2-2015q4-20151219-win32.tar.bz2",
               "size": "102981732",
               "checksum": "MD5:32d950225b6c7c886f6225c1fc578934"
