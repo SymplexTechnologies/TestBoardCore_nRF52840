@@ -22,7 +22,7 @@
           "checksum": "MD5:1825f6420104225f5fee11b467923b7d",
           "size": "591297",
           "boards": [
-            {"name": "nRF52840 DK"},
+            {"name": "nRF52840 DK"}
           ],
           "toolsDependencies": [
             {
