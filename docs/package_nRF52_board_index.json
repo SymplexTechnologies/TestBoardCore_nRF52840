@@ -1,9 +1,9 @@
 {
   "packages": [
     {
-      "name": "sandeepmistry",
+      "name": "SymplexTechnologies",
       "maintainer": "Symplex Technology",
-      "websiteURL": "https://github.com/sandeepmistry/arduino-nRF5",
+      "websiteURL": "https://github.com/SymplexTechnologies/TestBoardCore_nRF52840",
       "email": "justinyonghui.kim@gmail.com",
       "help": {
         "online": "https://youtube.com"
