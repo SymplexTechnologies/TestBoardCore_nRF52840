@@ -17,7 +17,7 @@
           "help": {
             "online": "https://youtube.com"
           },
-          "url": "https://github.com/SymplexTechnologies/TestBoardCore_nRF52840/archive/0.1.0.zip",
+          "url": "https://github.com/SymplexTechnologies/TestBoardCore_nRF52840/archive/0.1.2.zip",
           "archiveFileName": "TestBoardCore_nRF52840-0.1.0.zip",
           "boards": [
             {"name": "nRF52840 DK"}
