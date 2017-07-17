@@ -54,7 +54,7 @@
             },
             {
               "host": "x86_64-pc-linux-gnu",
-              "url": "https://github.com/sandeepmistry/arduino-nRF5/releases/download/tools/gcc-arm-none-eabi-5_2-2015q4-20151219-linux.tar.bz2",
+              "url": "https://github.com/sandeepmistry/arduino-nRF5/releases/download/tools/gcc-am-none-eabi-5_2-2015q4-20151219-linux.tar.bz2",
               "archiveFileName": "gcc-arm-none-eabi-5_2-2015q4-20151219-linux.tar.bz2",
               "size": "92811866",
               "checksum": "MD5:f88caac80b4444a17344f57ccb760b90"
