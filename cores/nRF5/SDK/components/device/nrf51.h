@@ -6,38 +6,47 @@
  *           nrf51 from Nordic Semiconductor.
  *
  * @version  V522
- * @date     23. February 2016
+ * @date     22. February 2017
  *
  * @note     Generated with SVDConv V2.81d 
  *           from CMSIS SVD File 'nrf51.svd' Version 522,
  *
- * @par      Copyright (c) 2013, Nordic Semiconductor ASA
+ * @par      Copyright (c) 2010 - 2017, Nordic Semiconductor ASA
+ *           
  *           All rights reserved.
  *           
- *           Redistribution and use in source and binary forms, with or without
- *           modification, are permitted provided that the following conditions are met:
+ *           Redistribution and use in source and binary forms, with or without modification,
+ *           are permitted provided that the following conditions are met:
  *           
- *           * Redistributions of source code must retain the above copyright notice, this
+ *           1. Redistributions of source code must retain the above copyright notice, this
  *           list of conditions and the following disclaimer.
  *           
- *           * Redistributions in binary form must reproduce the above copyright notice,
- *           this list of conditions and the following disclaimer in the documentation
- *           and/or other materials provided with the distribution.
+ *           2. Redistributions in binary form, except as embedded into a Nordic
+ *           Semiconductor ASA integrated circuit in a product or a software update for
+ *           such product, must reproduce the above copyright notice, this list of
+ *           conditions and the following disclaimer in the documentation and/or other
+ *           materials provided with the distribution.
  *           
- *           * Neither the name of Nordic Semiconductor ASA nor the names of its
- *           contributors may be used to endorse or promote products derived from
- *           this software without specific prior written permission.
+ *           3. Neither the name of Nordic Semiconductor ASA nor the names of its
+ *           contributors may be used to endorse or promote products derived from this
+ *           software without specific prior written permission.
  *           
- *           THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- *           AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- *           IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- *           DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
- *           FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- *           DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *           SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- *           CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- *           OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- *           OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *           4. This software, with or without modification, must only be used with a
+ *           Nordic Semiconductor ASA integrated circuit.
+ *           
+ *           5. Any software provided in binary form under this license must not be reverse
+ *           engineered, decompiled, modified and/or disassembled.
+ *           
+ *           THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
+ *           OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ *           OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ *           DISCLAIMED. IN NO EVENT SHALL NORDIC SEMICONDUCTOR ASA OR CONTRIBUTORS BE
+ *           LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ *           CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ *           GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ *           HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ *           LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ *           OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *           
  *
  *******************************************************************************************************/
@@ -146,33 +155,6 @@ typedef enum {
   #warning Not supported compiler type
 #endif
 
-
-typedef struct {
-  __IO uint32_t  CPU0;                              /*!< Configurable priority configuration register for CPU0.                */
-  __IO uint32_t  SPIS1;                             /*!< Configurable priority configuration register for SPIS1.               */
-  __IO uint32_t  RADIO;                             /*!< Configurable priority configuration register for RADIO.               */
-  __IO uint32_t  ECB;                               /*!< Configurable priority configuration register for ECB.                 */
-  __IO uint32_t  CCM;                               /*!< Configurable priority configuration register for CCM.                 */
-  __IO uint32_t  AAR;                               /*!< Configurable priority configuration register for AAR.                 */
-} AMLI_RAMPRI_Type;
-
-typedef struct {
-  __IO uint32_t  SCK;                               /*!< Pin select for SCK.                                                   */
-  __IO uint32_t  MOSI;                              /*!< Pin select for MOSI.                                                  */
-  __IO uint32_t  MISO;                              /*!< Pin select for MISO.                                                  */
-} SPIM_PSEL_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Data pointer.                                                         */
-  __IO uint32_t  MAXCNT;                            /*!< Maximum number of buffer bytes to receive.                            */
-  __I  uint32_t  AMOUNT;                            /*!< Number of bytes received in the last transaction.                     */
-} SPIM_RXD_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Data pointer.                                                         */
-  __IO uint32_t  MAXCNT;                            /*!< Maximum number of buffer bytes to send.                               */
-  __I  uint32_t  AMOUNT;                            /*!< Number of bytes sent in the last transaction.                         */
-} SPIM_TXD_Type;
 
 typedef struct {
   __O  uint32_t  EN;                                /*!< Enable channel group.                                                 */
@@ -290,21 +272,6 @@ typedef struct {                                    /*!< MPU Structure          
   __IO uint32_t  DISABLEINDEBUG;                    /*!< Disable erase and write protection mechanism in debug mode.           */
   __IO uint32_t  PROTBLOCKSIZE;                     /*!< Erase and write protection block size.                                */
 } NRF_MPU_Type;
-
-
-/* ================================================================================ */
-/* ================                      AMLI                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief AHB Multi-Layer Interface. (AMLI)
-  */
-
-typedef struct {                                    /*!< AMLI Structure                                                        */
-  __I  uint32_t  RESERVED0[896];
-  AMLI_RAMPRI_Type RAMPRI;                          /*!< RAM configurable priority configuration structure.                    */
-} NRF_AMLI_Type;
 
 
 /* ================================================================================ */
@@ -579,52 +546,6 @@ typedef struct {                                    /*!< SPIS Structure         
   __I  uint32_t  RESERVED15[654];
   __IO uint32_t  POWER;                             /*!< Peripheral power control.                                             */
 } NRF_SPIS_Type;
-
-
-/* ================================================================================ */
-/* ================                      SPIM                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief SPI master with easyDMA 1. (SPIM)
-  */
-
-typedef struct {                                    /*!< SPIM Structure                                                        */
-  __I  uint32_t  RESERVED0[4];
-  __O  uint32_t  TASKS_START;                       /*!< Start SPI transaction.                                                */
-  __O  uint32_t  TASKS_STOP;                        /*!< Stop SPI transaction.                                                 */
-  __I  uint32_t  RESERVED1;
-  __O  uint32_t  TASKS_SUSPEND;                     /*!< Suspend SPI transaction.                                              */
-  __O  uint32_t  TASKS_RESUME;                      /*!< Resume SPI transaction.                                               */
-  __I  uint32_t  RESERVED2[56];
-  __IO uint32_t  EVENTS_STOPPED;                    /*!< SPI transaction has stopped.                                          */
-  __I  uint32_t  RESERVED3[2];
-  __IO uint32_t  EVENTS_ENDRX;                      /*!< End of RXD buffer reached.                                            */
-  __I  uint32_t  RESERVED4[3];
-  __IO uint32_t  EVENTS_ENDTX;                      /*!< End of TXD buffer reached.                                            */
-  __I  uint32_t  RESERVED5[10];
-  __IO uint32_t  EVENTS_STARTED;                    /*!< Transaction started.                                                  */
-  __I  uint32_t  RESERVED6[109];
-  __IO uint32_t  INTENSET;                          /*!< Interrupt enable set register.                                        */
-  __IO uint32_t  INTENCLR;                          /*!< Interrupt enable clear register.                                      */
-  __I  uint32_t  RESERVED7[125];
-  __IO uint32_t  ENABLE;                            /*!< Enable SPIM.                                                          */
-  __I  uint32_t  RESERVED8;
-  SPIM_PSEL_Type PSEL;                              /*!< Pin select configuration.                                             */
-  __I  uint32_t  RESERVED9[4];
-  __IO uint32_t  FREQUENCY;                         /*!< SPI frequency.                                                        */
-  __I  uint32_t  RESERVED10[3];
-  SPIM_RXD_Type RXD;                                /*!< RXD EasyDMA configuration and status.                                 */
-  __I  uint32_t  RESERVED11;
-  SPIM_TXD_Type TXD;                                /*!< TXD EasyDMA configuration and status.                                 */
-  __I  uint32_t  RESERVED12;
-  __IO uint32_t  CONFIG;                            /*!< Configuration register.                                               */
-  __I  uint32_t  RESERVED13[26];
-  __IO uint32_t  ORC;                               /*!< Over-read character.                                                  */
-  __I  uint32_t  RESERVED14[654];
-  __IO uint32_t  POWER;                             /*!< Peripheral power control.                                             */
-} NRF_SPIM_Type;
 
 
 /* ================================================================================ */
@@ -1201,7 +1122,6 @@ typedef struct {                                    /*!< GPIO Structure         
 #define NRF_POWER_BASE                  0x40000000UL
 #define NRF_CLOCK_BASE                  0x40000000UL
 #define NRF_MPU_BASE                    0x40000000UL
-#define NRF_AMLI_BASE                   0x40000000UL
 #define NRF_RADIO_BASE                  0x40001000UL
 #define NRF_UART0_BASE                  0x40002000UL
 #define NRF_SPI0_BASE                   0x40003000UL
@@ -1209,7 +1129,6 @@ typedef struct {                                    /*!< GPIO Structure         
 #define NRF_SPI1_BASE                   0x40004000UL
 #define NRF_TWI1_BASE                   0x40004000UL
 #define NRF_SPIS1_BASE                  0x40004000UL
-#define NRF_SPIM1_BASE                  0x40004000UL
 #define NRF_GPIOTE_BASE                 0x40006000UL
 #define NRF_ADC_BASE                    0x40007000UL
 #define NRF_TIMER0_BASE                 0x40008000UL
@@ -1240,7 +1159,6 @@ typedef struct {                                    /*!< GPIO Structure         
 #define NRF_POWER                       ((NRF_POWER_Type          *) NRF_POWER_BASE)
 #define NRF_CLOCK                       ((NRF_CLOCK_Type          *) NRF_CLOCK_BASE)
 #define NRF_MPU                         ((NRF_MPU_Type            *) NRF_MPU_BASE)
-#define NRF_AMLI                        ((NRF_AMLI_Type           *) NRF_AMLI_BASE)
 #define NRF_RADIO                       ((NRF_RADIO_Type          *) NRF_RADIO_BASE)
 #define NRF_UART0                       ((NRF_UART_Type           *) NRF_UART0_BASE)
 #define NRF_SPI0                        ((NRF_SPI_Type            *) NRF_SPI0_BASE)
@@ -1248,7 +1166,6 @@ typedef struct {                                    /*!< GPIO Structure         
 #define NRF_SPI1                        ((NRF_SPI_Type            *) NRF_SPI1_BASE)
 #define NRF_TWI1                        ((NRF_TWI_Type            *) NRF_TWI1_BASE)
 #define NRF_SPIS1                       ((NRF_SPIS_Type           *) NRF_SPIS1_BASE)
-#define NRF_SPIM1                       ((NRF_SPIM_Type           *) NRF_SPIM1_BASE)
 #define NRF_GPIOTE                      ((NRF_GPIOTE_Type         *) NRF_GPIOTE_BASE)
 #define NRF_ADC                         ((NRF_ADC_Type            *) NRF_ADC_BASE)
 #define NRF_TIMER0                      ((NRF_TIMER_Type          *) NRF_TIMER0_BASE)
