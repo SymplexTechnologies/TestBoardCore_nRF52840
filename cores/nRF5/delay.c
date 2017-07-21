@@ -56,17 +56,6 @@ void delay( uint32_t ms )
   } while ( millis() - start < ms ) ;
 }
 
-void RTC1_IRQHandler(void)
-{
-  NRF_RTC1->EVENTS_OVRFLW = 0;
-
-#if __CORTEX_M == 0x04
-    volatile uint32_t dummy = NRF_RTC1->EVENTS_OVRFLW;
-    (void)dummy;
-#endif
-
-  overflows = (overflows + 1) & 0xff;
-}
 
 #ifdef __cplusplus
 }

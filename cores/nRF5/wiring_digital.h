@@ -24,6 +24,7 @@
 #endif
 
 #include "nrf.h"
+#include "nrf_gpio.h"
 // #include "WVariant.h"
 
 /**
@@ -65,7 +66,7 @@ extern void digitalWrite( uint32_t dwPin, uint32_t dwVal ) ;
  */
 extern int digitalRead( uint32_t ulPin ) ;
 
-NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin);
+//NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin);
 
 #ifdef __cplusplus
 }

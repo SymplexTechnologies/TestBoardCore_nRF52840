@@ -113,6 +113,6 @@ void loop( void ) ;
 
 #ifdef __cplusplus
 #include "Uart.h"
-#endif // __cplusplus
+#endif 	// __cplusplus
 
-#endif // Arduino_h
+#endif	/* Arduino_h */

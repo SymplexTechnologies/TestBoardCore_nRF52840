@@ -28,15 +28,17 @@
 extern "C" {
 #endif
 
-#define PWM_COUNT 3
+#define PWM_COUNT 4
 
 static NRF_PWM_Type* pwms[PWM_COUNT] = {
   NRF_PWM0,
   NRF_PWM1,
+  NRF_PWM2,
   NRF_PWM2
 };
 
 static uint32_t pwmChannelPins[PWM_COUNT] = {
+  0xFFFFFFFF,
   0xFFFFFFFF,
   0xFFFFFFFF,
   0xFFFFFFFF
@@ -107,7 +109,7 @@ uint32_t analogRead( uint32_t ulPin )
     return 0;
   }
 
-  #ifdef NRF52840
+  #ifdef NRF52840_XXAA
     ulPin = g_ADigitalPinMap[ulPin].ulPin;
   #else
     ulPin = g_ADigitalPinMap[ulPin];
@@ -218,7 +220,7 @@ void analogWrite( uint32_t ulPin, uint32_t ulValue )
     return;
   }
 
-  #ifdef NRF52840
+  #ifdef NRF52840_XXAA
     ulPin = g_ADigitalPinMap[ulPin].ulPin;
   #else
     ulPin = g_ADigitalPinMap[ulPin];

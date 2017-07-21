@@ -25,7 +25,7 @@ Uart::Uart(NRF_UART_Type *_nrfUart, IRQn_Type _IRQn, uint8_t _pinRX, uint8_t _pi
 {
   nrfUart = _nrfUart;
   IRQn = _IRQn;
-  #ifdef NRF52840
+  #ifdef NRF52840_XXAA
     uc_pinRX = g_ADigitalPinMap[_pinRX].ulPin;
     uc_pinTX = g_ADigitalPinMap[_pinTX].ulPin;
   #else

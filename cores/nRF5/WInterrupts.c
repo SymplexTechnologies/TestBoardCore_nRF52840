@@ -60,7 +60,7 @@ void attachInterrupt(uint32_t pin, voidFuncPtr callback, uint32_t mode)
   if (pin >= PINS_COUNT) {
     return;
   }
-  #ifdef NRF52840
+  #ifdef NRF52840_XXAA
     pin = g_ADigitalPinMap[pin].ulPin;
   #else
     pin = g_ADigitalPinMap[pin];
@@ -112,7 +112,7 @@ void detachInterrupt(uint32_t pin)
     return;
   }
 
-  #ifdef NRF52840
+  #ifdef NRF52840_XXAA
     pin = g_ADigitalPinMap[pin].ulPin;
   #else
     pin = g_ADigitalPinMap[pin];

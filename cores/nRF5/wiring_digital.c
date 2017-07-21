@@ -31,7 +31,7 @@ void pinMode( uint32_t ulPin, uint32_t ulMode )
     return;
   }
 
-  #ifdef NRF52840
+  #ifdef NRF52840_XXAA
     ulPin = NRF_GPIO_PIN_MAP(g_ADigitalPinMap[ulPin].ulPort,g_ADigitalPinMap[ulPin].ulPin);
     NRF_GPIO_Type * p_reg = nrf_gpio_pin_port_decode(&ulPin);
   #else
@@ -92,7 +92,7 @@ void digitalWrite( uint32_t ulPin, uint32_t ulVal )
     return;
   }
 
-  #ifdef NRF52840
+  #ifdef NRF52840_XXAA
     ulPin = NRF_GPIO_PIN_MAP(g_ADigitalPinMap[ulPin].ulPort,g_ADigitalPinMap[ulPin].ulPin);
     NRF_GPIO_Type * p_reg = nrf_gpio_pin_port_decode(&ulPin);
   #else
@@ -119,7 +119,7 @@ int digitalRead( uint32_t ulPin )
   if (ulPin >= PINS_COUNT) {
     return 0;
   }
-  #ifdef NRF52840
+  #ifdef NRF52840_XXAA
     ulPin = NRF_GPIO_PIN_MAP(g_ADigitalPinMap[ulPin].ulPort,g_ADigitalPinMap[ulPin].ulPin);
     NRF_GPIO_Type * p_reg = nrf_gpio_pin_port_decode(&ulPin);
   #else
@@ -137,7 +137,7 @@ int digitalRead( uint32_t ulPin )
  * @return Pointer to port register set.
  *
  */
-NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
+/*NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
 {
 #if (GPIO_COUNT == 1)
     // The oldest definition case
@@ -154,7 +154,7 @@ NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
     }
 #endif
 }
-
+*/
 
 #ifdef __cplusplus
 }

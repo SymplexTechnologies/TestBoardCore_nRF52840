@@ -26,7 +26,7 @@ extern "C" {
 
 
 
-#ifdef NRF52840
+#ifdef NRF52840_XXAA
 /* Types used for the table below */
 typedef struct _PinDescription
 {
