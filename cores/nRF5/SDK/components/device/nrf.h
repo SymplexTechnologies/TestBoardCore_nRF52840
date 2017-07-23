@@ -48,7 +48,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define MDK_MICRO_VERSION   0
 
 /* Redefine "old" too-generic name NRF52 to NRF52832_XXAA to keep backwards compatibility. */
-#if defined (NRF522)
+#if defined (NRF52)
     #ifndef NRF52832_XXAA
         #define NRF52832_XXAA
     #endif

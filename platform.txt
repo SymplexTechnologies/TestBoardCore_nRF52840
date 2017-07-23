@@ -60,7 +60,7 @@ compiler.size.cmd=arm-none-eabi-size
 
 # Toolchain libraries and headers
 nrf.sdk.path={build.core.path}/SDK
-compiler.nrf.flags="-I{nrf.sdk.path}/components/" "-I{nrf.sdk.path}/components/toolchain/" "-I{nrf.components.path}/toolchain/gcc/" "-I{nrf.sdk.path}/components/toolchain/CMSIS/Include" 
+compiler.nrf.flags="-I{nrf.sdk.path}/components/" "-I{nrf.sdk.path}/components/toolchain/" "-I{nrf.components.path}/toolchain/gcc/" "-I{nrf.sdk.path}/components/toolchain/CMSIS/Include/" "-I{build.core.path}/MyComponents/" 
 
 # NRF sdk_config.h
 nrf.components.path={nrf.sdk.path}/components
@@ -90,15 +90,15 @@ nrf.external.path={nrf.sdk.path}/external
 
 # OpenThread and NRF CC310 headers
 nrf.external.path={nrf.sdk.path}/external
-compiler.external.flags="-I{nrf.external.path}/nrf_cc310/include/" "-I{nrf.external.path}/segger_rtt/" "-I{nrf.external.path}/openthread/include/"
+compiler.external.flags="-I{nrf.external.path}/nrf_cc310/include/" "-I{nrf.external.path}/segger_rtt/" "-I{nrf.external.path}/openthread/include/" "-I{nrf.external.path}/openthread/include/openthread/" "-I{nrf.external.path}/openthread/include/openthread/platform/" "-I{nrf.external.path}/segger_rtt/"
 
 # OpenThread static libraries
 nrf.openthreadlib.path={nrf.external.path}/openthread/lib/gcc
-compiler.openthreadlib.flags="-I{nrf.openthreadlib.path}/libopenthread-cli-ftd.a" "-I{nrf.openthreadlib.path}/libopenthread-ftd.a" "-I{nrf.openthreadlib.path}/libopenthread-nrf52840-sdk.a" "-I{nrf.openthreadlib.path}/libopenthread-diag.a" "-I{nrf.openthreadlib.path}/libmbedcrypto.a"
+compiler.openthreadlib.flags="{nrf.openthreadlib.path}/libopenthread-cli-ftd.a" "{nrf.openthreadlib.path}/libopenthread-ftd.a" "{nrf.openthreadlib.path}/libopenthread-nrf52840-sdk.a" "{nrf.openthreadlib.path}/libopenthread-diag.a" "{nrf.openthreadlib.path}/libmbedcrypto.a"
 
 # NRF CC310 static library
 nrf_cc310.path={nrf.external.path}/nrf_cc310/lib
-compiler.nrf_cc310.flags="-I{nrf_cc310.path}/libcc310_gcc_0.9.0.a"
+compiler.nrf_cc310.flags="{nrf_cc310.path}/libcc310_gcc_0.9.0.a"
 
 
 
@@ -117,19 +117,19 @@ compiler.elf2hex.extra_flags=
 # ----------------
 
 ## Compile c files
-recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.extra_flags} {compiler.nrf.flags} {compiler.components.flags} {compiler.cdevice.flags} {compiler.clibraries.flags} {compiler.cboards.flags} {compiler.cdrivers.flags} {compiler.external.flags} {compiler.openthreadlib.flags} {compiler.nrf_cc310.flags} {includes} "{source_file}" {compiler.openthreadlib.flags} {compiler.nrf_cc310.flags} -o "{object_file}"
+recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.extra_flags} {compiler.nrf.flags} {compiler.components.flags} {compiler.cdevice.flags} {compiler.clibraries.flags} {compiler.cboards.flags} {compiler.cdrivers.flags} {compiler.external.flags} {includes} "{source_file}" -o "{object_file}"
 
 ## Compile c++ files
-recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.extra_flags} {compiler.nrf.flags} {compiler.components.flags} {compiler.cdevice.flags} {compiler.clibraries.flags} {compiler.cboards.flags} {compiler.cdrivers.flags} {compiler.external.flags} {compiler.openthreadlib.flags} {compiler.nrf_cc310.flags} {includes} "{source_file}" -o "{object_file}"
+recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {build.extra_flags} {compiler.nrf.flags} {compiler.components.flags} {compiler.cdevice.flags} {compiler.clibraries.flags} {compiler.cboards.flags} {compiler.cdrivers.flags} {compiler.external.flags} {includes} "{source_file}" -o "{object_file}"
 
 ## Compile S files
-recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.S.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
+recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} -DF_CPU={build.f_cpu} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.S.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}" 
 
 ## Create archives
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
 
 ## Combine gc-sections, archives, and objects
-recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}"  "-L{build.path}" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} "-L{nrf.sdk.path}/components/toolchain/gcc/" "-L{nrf.sdk.path}/external/openthread/linker_scripts/" "-T{build.ldscript}" "-Wl,-Map,{build.path}/{build.project_name}.map" --specs=nano.specs --specs=nosys.specs {compiler.ldflags} -o "{build.path}/{build.project_name}.elf" {object_files} -Wl,--start-group -lm "{build.path}/{archive_file}" -Wl,--end-group
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" "-L{build.path}" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} "-L{nrf.sdk.path}/components/toolchain/gcc/" "-L{nrf.sdk.path}/external/openthread/linker_scripts/" "-T{build.ldscript}" "-Wl,-Map,{build.path}/{build.project_name}.map" --specs=nano.specs --specs=nosys.specs {compiler.ldflags} -o "{build.path}/{build.project_name}.elf" {object_files} -Wl,--start-group -lm {compiler.openthreadlib.flags} {compiler.nrf_cc310.flags} "{build.path}/{archive_file}" -Wl,--end-group
 
 ## Create output (bin file)
 recipe.objcopy.bin.pattern="{compiler.path}{compiler.elf2bin.cmd}" {compiler.elf2bin.flags} {compiler.elf2bin.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.bin"

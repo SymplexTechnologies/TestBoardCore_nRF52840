@@ -56,7 +56,7 @@ class Uart : public HardwareSerial
 
 #ifdef __cplusplus
 
-extern Uart Serial;
+//extern Uart Serial;
 
 #endif
 

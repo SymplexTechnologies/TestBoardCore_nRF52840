@@ -191,9 +191,9 @@ size_t Uart::write(const uint8_t data)
 
   return 1;
 }
-
+/*
 #if defined(NRF52)
-Uart Serial( NRF_UART0, UARTE0_UART0_IRQn, PIN_SERIAL_RX, PIN_SERIAL_TX );
+//Uart Serial( NRF_UART0, UARTE0_UART0_IRQn, PIN_SERIAL_RX, PIN_SERIAL_TX );
 
 extern "C"
 {
@@ -213,3 +213,4 @@ extern "C"
   }
 }
 #endif
+*/

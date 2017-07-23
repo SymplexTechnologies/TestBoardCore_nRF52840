@@ -258,29 +258,6 @@
 // <h> nRF_Libraries 
 
 //==========================================================
-// <e> APP_SCHEDULER_ENABLED - app_scheduler - Events scheduler
-//==========================================================
-#ifndef APP_SCHEDULER_ENABLED
-#define APP_SCHEDULER_ENABLED 1
-#endif
-#if  APP_SCHEDULER_ENABLED
-// <q> APP_SCHEDULER_WITH_PAUSE  - Enabling pause feature
- 
-
-#ifndef APP_SCHEDULER_WITH_PAUSE
-#define APP_SCHEDULER_WITH_PAUSE 0
-#endif
-
-// <q> APP_SCHEDULER_WITH_PROFILER  - Enabling scheduler profiling
- 
-
-#ifndef APP_SCHEDULER_WITH_PROFILER
-#define APP_SCHEDULER_WITH_PROFILER 0
-#endif
-
-#endif //APP_SCHEDULER_ENABLED
-// </e>
-
 // <e> APP_TIMER_ENABLED - app_timer - Application timer functionality
 //==========================================================
 #ifndef APP_TIMER_ENABLED
@@ -386,7 +363,7 @@
 // <e> NRF_LOG_ENABLED - nrf_log - Logging
 //==========================================================
 #ifndef NRF_LOG_ENABLED
-#define NRF_LOG_ENABLED 1
+#define NRF_LOG_ENABLED 0
 #endif
 #if  NRF_LOG_ENABLED
 // <e> NRF_LOG_USES_COLORS - If enabled then ANSI escape code for colors is prefixed to every string
